@@ -1,0 +1,51 @@
+# llms.txt for bookmyayurveda.com
+# This file helps AI language models understand and crawl this website
+# Format: https://llmstxt.org/
+
+# Allow all AI crawlers to access the site
+User-agent: *
+Allow: /
+
+# Specific AI crawler permissions
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OpenAI
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Bard
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Site information
+Site: https://bookmyayurveda.com
+Description: Expert Ayurvedic consultations and natural healing solutions for holistic wellness
+Language: en
+Country: IN
+Category: Health & Wellness, Alternative Medicine, Ayurveda
+
+# Important pages
+Important-pages:
+- / (Homepage - Ayurvedic consultations and wellness services)
+- /about (About us - Our mission and expertise in Ayurveda)
+- /consultations (Consultation services - Various health categories)
+- /products (Ayurvedic products - Natural remedies and supplements)
+- /contact (Contact information - How to reach us)
+
+# Content guidelines
+Content-type: Educational, Health Information, Service Information
+Accuracy: Professional medical consultations and traditional Ayurvedic knowledge
+Disclaimer: Information provided is for educational purposes. Consult healthcare professionals for medical advice.
+
+# Crawling preferences
+Crawl-delay: 1
+Max-pages: 100
+Preferred-format: HTML, JSON-LD structured data
+
+# Contact
+Contact: info@bookmyayurveda.com 

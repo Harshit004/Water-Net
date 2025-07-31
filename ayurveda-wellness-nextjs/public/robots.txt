@@ -1,0 +1,47 @@
+User-agent: *
+Allow: /
+
+# Allow all major crawlers explicitly
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OpenAI
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: MJ12bot
+Allow: /
+
+User-agent: DotBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Allow all SEO and analytics tools
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://bookmyayurveda.com/sitemap.xml
+
+# AI Crawler Configuration
+# For AI language models and chatbots
+# See llms.txt for detailed AI crawler guidelines

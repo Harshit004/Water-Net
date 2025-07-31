@@ -1,0 +1,1452 @@
+{
+  "generated": "2025-07-31T02:36:03.637Z",
+  "version": "1.0.0",
+  "total_routes": 99,
+  "routes": [
+    {
+      "path": "/",
+      "type": "static",
+      "priority": "high"
+    },
+    {
+      "path": "/about",
+      "type": "static",
+      "priority": "medium"
+    },
+    {
+      "path": "/blogs",
+      "type": "static",
+      "priority": "medium"
+    },
+    {
+      "path": "/consultations",
+      "type": "static",
+      "priority": "medium"
+    },
+    {
+      "path": "/contact",
+      "type": "static",
+      "priority": "medium"
+    },
+    {
+      "path": "/disclaimer",
+      "type": "static",
+      "priority": "medium"
+    },
+    {
+      "path": "/doctors",
+      "type": "static",
+      "priority": "medium"
+    },
+    {
+      "path": "/faq",
+      "type": "static",
+      "priority": "medium"
+    },
+    {
+      "path": "/privacy",
+      "type": "static",
+      "priority": "medium"
+    },
+    {
+      "path": "/refund",
+      "type": "static",
+      "priority": "medium"
+    },
+    {
+      "path": "/shipping",
+      "type": "static",
+      "priority": "medium"
+    },
+    {
+      "path": "/terms",
+      "type": "static",
+      "priority": "medium"
+    },
+    {
+      "path": "/consultations/digestive-gut-health",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/digestive-gut-health/acid-reflux-gerd",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "digestive-gut-health",
+      "subcategory": "acid-reflux-gerd"
+    },
+    {
+      "path": "/consultations/digestive-gut-health/constipation",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "digestive-gut-health",
+      "subcategory": "constipation"
+    },
+    {
+      "path": "/consultations/digestive-gut-health/bloating-gas",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "digestive-gut-health",
+      "subcategory": "bloating-gas"
+    },
+    {
+      "path": "/consultations/digestive-gut-health/indigestion-poor-metabolism",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "digestive-gut-health",
+      "subcategory": "indigestion-poor-metabolism"
+    },
+    {
+      "path": "/consultations/digestive-gut-health/ibs",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "digestive-gut-health",
+      "subcategory": "ibs"
+    },
+    {
+      "path": "/consultations/digestive-gut-health/leaky-gut-syndrome",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "digestive-gut-health",
+      "subcategory": "leaky-gut-syndrome"
+    },
+    {
+      "path": "/consultations/mental-health-sleep",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/mental-health-sleep/anxiety-panic-attacks",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mental-health-sleep",
+      "subcategory": "anxiety-panic-attacks"
+    },
+    {
+      "path": "/consultations/mental-health-sleep/chronic-stress-burnout",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mental-health-sleep",
+      "subcategory": "chronic-stress-burnout"
+    },
+    {
+      "path": "/consultations/mental-health-sleep/depression",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mental-health-sleep",
+      "subcategory": "depression"
+    },
+    {
+      "path": "/consultations/mental-health-sleep/sleep-disorders-insomnia",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mental-health-sleep",
+      "subcategory": "sleep-disorders-insomnia"
+    },
+    {
+      "path": "/consultations/mental-health-sleep/brain-fog-poor-focus",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mental-health-sleep",
+      "subcategory": "brain-fog-poor-focus"
+    },
+    {
+      "path": "/consultations/mental-health-sleep/mental-fatigue",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mental-health-sleep",
+      "subcategory": "mental-fatigue"
+    },
+    {
+      "path": "/consultations/immunity-respiratory-health",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/immunity-respiratory-health/frequent-cold-cough",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "immunity-respiratory-health",
+      "subcategory": "frequent-cold-cough"
+    },
+    {
+      "path": "/consultations/immunity-respiratory-health/chronic-bronchitis",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "immunity-respiratory-health",
+      "subcategory": "chronic-bronchitis"
+    },
+    {
+      "path": "/consultations/immunity-respiratory-health/allergies-hay-fever",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "immunity-respiratory-health",
+      "subcategory": "allergies-hay-fever"
+    },
+    {
+      "path": "/consultations/immunity-respiratory-health/asthma-support",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "immunity-respiratory-health",
+      "subcategory": "asthma-support"
+    },
+    {
+      "path": "/consultations/immunity-respiratory-health/sinusitis",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "immunity-respiratory-health",
+      "subcategory": "sinusitis"
+    },
+    {
+      "path": "/consultations/immunity-respiratory-health/low-immunity-weak-resistance",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "immunity-respiratory-health",
+      "subcategory": "low-immunity-weak-resistance"
+    },
+    {
+      "path": "/consultations/hormonal-balance-endocrine-health",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/hormonal-balance-endocrine-health/hypothyroidism-hyperthyroidism",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "hormonal-balance-endocrine-health",
+      "subcategory": "hypothyroidism-hyperthyroidism"
+    },
+    {
+      "path": "/consultations/hormonal-balance-endocrine-health/adrenal-fatigue",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "hormonal-balance-endocrine-health",
+      "subcategory": "adrenal-fatigue"
+    },
+    {
+      "path": "/consultations/hormonal-balance-endocrine-health/blood-sugar-imbalance-prediabetes",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "hormonal-balance-endocrine-health",
+      "subcategory": "blood-sugar-imbalance-prediabetes"
+    },
+    {
+      "path": "/consultations/hormonal-balance-endocrine-health/pcos-pcod",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "hormonal-balance-endocrine-health",
+      "subcategory": "pcos-pcod"
+    },
+    {
+      "path": "/consultations/hormonal-balance-endocrine-health/irregular-hormonal-cycles",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "hormonal-balance-endocrine-health",
+      "subcategory": "irregular-hormonal-cycles"
+    },
+    {
+      "path": "/consultations/womens-health",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/womens-health/pcos-pcod",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "womens-health",
+      "subcategory": "pcos-pcod"
+    },
+    {
+      "path": "/consultations/womens-health/irregular-painful-periods",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "womens-health",
+      "subcategory": "irregular-painful-periods"
+    },
+    {
+      "path": "/consultations/womens-health/menstrual-cramps",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "womens-health",
+      "subcategory": "menstrual-cramps"
+    },
+    {
+      "path": "/consultations/womens-health/menopause-support",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "womens-health",
+      "subcategory": "menopause-support"
+    },
+    {
+      "path": "/consultations/womens-health/fertility-support",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "womens-health",
+      "subcategory": "fertility-support"
+    },
+    {
+      "path": "/consultations/womens-health/endometriosis",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "womens-health",
+      "subcategory": "endometriosis"
+    },
+    {
+      "path": "/consultations/womens-health/hormonal-acne",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "womens-health",
+      "subcategory": "hormonal-acne"
+    },
+    {
+      "path": "/consultations/womens-health/vaginal-dryness-ph-imbalance",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "womens-health",
+      "subcategory": "vaginal-dryness-ph-imbalance"
+    },
+    {
+      "path": "/consultations/mens-health",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/mens-health/erectile-dysfunction",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mens-health",
+      "subcategory": "erectile-dysfunction"
+    },
+    {
+      "path": "/consultations/mens-health/premature-ejaculation",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mens-health",
+      "subcategory": "premature-ejaculation"
+    },
+    {
+      "path": "/consultations/mens-health/low-testosterone",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mens-health",
+      "subcategory": "low-testosterone"
+    },
+    {
+      "path": "/consultations/mens-health/prostate-health",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mens-health",
+      "subcategory": "prostate-health"
+    },
+    {
+      "path": "/consultations/mens-health/male-infertility",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mens-health",
+      "subcategory": "male-infertility"
+    },
+    {
+      "path": "/consultations/mens-health/hair-loss-baldness",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mens-health",
+      "subcategory": "hair-loss-baldness"
+    },
+    {
+      "path": "/consultations/mens-health/stress-management",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "mens-health",
+      "subcategory": "stress-management"
+    },
+    {
+      "path": "/consultations/weight-metabolic-health",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/weight-metabolic-health/obesity-weight-gain",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "weight-metabolic-health",
+      "subcategory": "obesity-weight-gain"
+    },
+    {
+      "path": "/consultations/weight-metabolic-health/underweight-poor-appetite",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "weight-metabolic-health",
+      "subcategory": "underweight-poor-appetite"
+    },
+    {
+      "path": "/consultations/weight-metabolic-health/high-cholesterol",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "weight-metabolic-health",
+      "subcategory": "high-cholesterol"
+    },
+    {
+      "path": "/consultations/weight-metabolic-health/metabolic-syndrome",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "weight-metabolic-health",
+      "subcategory": "metabolic-syndrome"
+    },
+    {
+      "path": "/consultations/weight-metabolic-health/type-2-diabetes-support",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "weight-metabolic-health",
+      "subcategory": "type-2-diabetes-support"
+    },
+    {
+      "path": "/consultations/skin-hair-health",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/skin-hair-health/acne-pimples",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "skin-hair-health",
+      "subcategory": "acne-pimples"
+    },
+    {
+      "path": "/consultations/skin-hair-health/hair-fall-thinning",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "skin-hair-health",
+      "subcategory": "hair-fall-thinning"
+    },
+    {
+      "path": "/consultations/skin-hair-health/dry-oily-skin",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "skin-hair-health",
+      "subcategory": "dry-oily-skin"
+    },
+    {
+      "path": "/consultations/skin-hair-health/psoriasis-eczema",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "skin-hair-health",
+      "subcategory": "psoriasis-eczema"
+    },
+    {
+      "path": "/consultations/skin-hair-health/premature-graying",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "skin-hair-health",
+      "subcategory": "premature-graying"
+    },
+    {
+      "path": "/consultations/skin-hair-health/dandruff-scalp-infections",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "skin-hair-health",
+      "subcategory": "dandruff-scalp-infections"
+    },
+    {
+      "path": "/consultations/joint-bone-health",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/joint-bone-health/osteoarthritis",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "joint-bone-health",
+      "subcategory": "osteoarthritis"
+    },
+    {
+      "path": "/consultations/joint-bone-health/rheumatoid-arthritis",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "joint-bone-health",
+      "subcategory": "rheumatoid-arthritis"
+    },
+    {
+      "path": "/consultations/joint-bone-health/gout",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "joint-bone-health",
+      "subcategory": "gout"
+    },
+    {
+      "path": "/consultations/joint-bone-health/back-pain-sciatica",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "joint-bone-health",
+      "subcategory": "back-pain-sciatica"
+    },
+    {
+      "path": "/consultations/joint-bone-health/weak-bones-osteoporosis",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "joint-bone-health",
+      "subcategory": "weak-bones-osteoporosis"
+    },
+    {
+      "path": "/consultations/liver-kidney-detox",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/liver-kidney-detox/fatty-liver",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "liver-kidney-detox",
+      "subcategory": "fatty-liver"
+    },
+    {
+      "path": "/consultations/liver-kidney-detox/liver-detox",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "liver-kidney-detox",
+      "subcategory": "liver-detox"
+    },
+    {
+      "path": "/consultations/liver-kidney-detox/kidney-stones",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "liver-kidney-detox",
+      "subcategory": "kidney-stones"
+    },
+    {
+      "path": "/consultations/liver-kidney-detox/recurrent-uti",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "liver-kidney-detox",
+      "subcategory": "recurrent-uti"
+    },
+    {
+      "path": "/consultations/liver-kidney-detox/urinary-incontinence",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "liver-kidney-detox",
+      "subcategory": "urinary-incontinence"
+    },
+    {
+      "path": "/consultations/heart-circulatory-health",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/heart-circulatory-health/high-blood-pressure",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "heart-circulatory-health",
+      "subcategory": "high-blood-pressure"
+    },
+    {
+      "path": "/consultations/heart-circulatory-health/heart-palpitations",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "heart-circulatory-health",
+      "subcategory": "heart-palpitations"
+    },
+    {
+      "path": "/consultations/heart-circulatory-health/high-cholesterol",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "heart-circulatory-health",
+      "subcategory": "high-cholesterol"
+    },
+    {
+      "path": "/consultations/heart-circulatory-health/poor-circulation",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "heart-circulatory-health",
+      "subcategory": "poor-circulation"
+    },
+    {
+      "path": "/consultations/heart-circulatory-health/cardiac-weakness",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "heart-circulatory-health",
+      "subcategory": "cardiac-weakness"
+    },
+    {
+      "path": "/consultations/childrens-wellness",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/childrens-wellness/poor-appetite-weak-digestion",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "childrens-wellness",
+      "subcategory": "poor-appetite-weak-digestion"
+    },
+    {
+      "path": "/consultations/childrens-wellness/frequent-infections",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "childrens-wellness",
+      "subcategory": "frequent-infections"
+    },
+    {
+      "path": "/consultations/childrens-wellness/sleep-issues-restlessness",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "childrens-wellness",
+      "subcategory": "sleep-issues-restlessness"
+    },
+    {
+      "path": "/consultations/childrens-wellness/adhd-hyperactivity",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "childrens-wellness",
+      "subcategory": "adhd-hyperactivity"
+    },
+    {
+      "path": "/consultations/childrens-wellness/growth-development-issues",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "childrens-wellness",
+      "subcategory": "growth-development-issues"
+    },
+    {
+      "path": "/consultations/senior-elderly-care",
+      "type": "consultation-category",
+      "priority": "medium",
+      "category": null,
+      "subcategory": null
+    },
+    {
+      "path": "/consultations/senior-elderly-care/memory-loss-dementia",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "senior-elderly-care",
+      "subcategory": "memory-loss-dementia"
+    },
+    {
+      "path": "/consultations/senior-elderly-care/weak-digestion",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "senior-elderly-care",
+      "subcategory": "weak-digestion"
+    },
+    {
+      "path": "/consultations/senior-elderly-care/joint-degeneration",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "senior-elderly-care",
+      "subcategory": "joint-degeneration"
+    },
+    {
+      "path": "/consultations/senior-elderly-care/chronic-pain",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "senior-elderly-care",
+      "subcategory": "chronic-pain"
+    },
+    {
+      "path": "/consultations/senior-elderly-care/insomnia-light-sleep",
+      "type": "consultation-subcategory",
+      "priority": "medium",
+      "category": "senior-elderly-care",
+      "subcategory": "insomnia-light-sleep"
+    }
+  ],
+  "categories": {
+    "static": 12,
+    "consultation-category": 13,
+    "consultation-subcategory": 74
+  },
+  "testing": {
+    "smoke_test_routes": [
+      {
+        "path": "/",
+        "type": "static",
+        "priority": "high"
+      },
+      {
+        "path": "/consultations/digestive-gut-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/mental-health-sleep",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/immunity-respiratory-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/hormonal-balance-endocrine-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/womens-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/mens-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/weight-metabolic-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/skin-hair-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/joint-bone-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/liver-kidney-detox",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/heart-circulatory-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/childrens-wellness",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/senior-elderly-care",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      }
+    ],
+    "regression_test_routes": [
+      {
+        "path": "/",
+        "type": "static",
+        "priority": "high"
+      },
+      {
+        "path": "/about",
+        "type": "static",
+        "priority": "medium"
+      },
+      {
+        "path": "/blogs",
+        "type": "static",
+        "priority": "medium"
+      },
+      {
+        "path": "/consultations",
+        "type": "static",
+        "priority": "medium"
+      },
+      {
+        "path": "/contact",
+        "type": "static",
+        "priority": "medium"
+      },
+      {
+        "path": "/disclaimer",
+        "type": "static",
+        "priority": "medium"
+      },
+      {
+        "path": "/doctors",
+        "type": "static",
+        "priority": "medium"
+      },
+      {
+        "path": "/faq",
+        "type": "static",
+        "priority": "medium"
+      },
+      {
+        "path": "/privacy",
+        "type": "static",
+        "priority": "medium"
+      },
+      {
+        "path": "/refund",
+        "type": "static",
+        "priority": "medium"
+      },
+      {
+        "path": "/shipping",
+        "type": "static",
+        "priority": "medium"
+      },
+      {
+        "path": "/terms",
+        "type": "static",
+        "priority": "medium"
+      },
+      {
+        "path": "/consultations/digestive-gut-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/digestive-gut-health/acid-reflux-gerd",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "digestive-gut-health",
+        "subcategory": "acid-reflux-gerd"
+      },
+      {
+        "path": "/consultations/digestive-gut-health/constipation",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "digestive-gut-health",
+        "subcategory": "constipation"
+      },
+      {
+        "path": "/consultations/digestive-gut-health/bloating-gas",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "digestive-gut-health",
+        "subcategory": "bloating-gas"
+      },
+      {
+        "path": "/consultations/digestive-gut-health/indigestion-poor-metabolism",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "digestive-gut-health",
+        "subcategory": "indigestion-poor-metabolism"
+      },
+      {
+        "path": "/consultations/digestive-gut-health/ibs",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "digestive-gut-health",
+        "subcategory": "ibs"
+      },
+      {
+        "path": "/consultations/digestive-gut-health/leaky-gut-syndrome",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "digestive-gut-health",
+        "subcategory": "leaky-gut-syndrome"
+      },
+      {
+        "path": "/consultations/mental-health-sleep",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/mental-health-sleep/anxiety-panic-attacks",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mental-health-sleep",
+        "subcategory": "anxiety-panic-attacks"
+      },
+      {
+        "path": "/consultations/mental-health-sleep/chronic-stress-burnout",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mental-health-sleep",
+        "subcategory": "chronic-stress-burnout"
+      },
+      {
+        "path": "/consultations/mental-health-sleep/depression",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mental-health-sleep",
+        "subcategory": "depression"
+      },
+      {
+        "path": "/consultations/mental-health-sleep/sleep-disorders-insomnia",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mental-health-sleep",
+        "subcategory": "sleep-disorders-insomnia"
+      },
+      {
+        "path": "/consultations/mental-health-sleep/brain-fog-poor-focus",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mental-health-sleep",
+        "subcategory": "brain-fog-poor-focus"
+      },
+      {
+        "path": "/consultations/mental-health-sleep/mental-fatigue",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mental-health-sleep",
+        "subcategory": "mental-fatigue"
+      },
+      {
+        "path": "/consultations/immunity-respiratory-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/immunity-respiratory-health/frequent-cold-cough",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "immunity-respiratory-health",
+        "subcategory": "frequent-cold-cough"
+      },
+      {
+        "path": "/consultations/immunity-respiratory-health/chronic-bronchitis",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "immunity-respiratory-health",
+        "subcategory": "chronic-bronchitis"
+      },
+      {
+        "path": "/consultations/immunity-respiratory-health/allergies-hay-fever",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "immunity-respiratory-health",
+        "subcategory": "allergies-hay-fever"
+      },
+      {
+        "path": "/consultations/immunity-respiratory-health/asthma-support",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "immunity-respiratory-health",
+        "subcategory": "asthma-support"
+      },
+      {
+        "path": "/consultations/immunity-respiratory-health/sinusitis",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "immunity-respiratory-health",
+        "subcategory": "sinusitis"
+      },
+      {
+        "path": "/consultations/immunity-respiratory-health/low-immunity-weak-resistance",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "immunity-respiratory-health",
+        "subcategory": "low-immunity-weak-resistance"
+      },
+      {
+        "path": "/consultations/hormonal-balance-endocrine-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/hormonal-balance-endocrine-health/hypothyroidism-hyperthyroidism",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "hormonal-balance-endocrine-health",
+        "subcategory": "hypothyroidism-hyperthyroidism"
+      },
+      {
+        "path": "/consultations/hormonal-balance-endocrine-health/adrenal-fatigue",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "hormonal-balance-endocrine-health",
+        "subcategory": "adrenal-fatigue"
+      },
+      {
+        "path": "/consultations/hormonal-balance-endocrine-health/blood-sugar-imbalance-prediabetes",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "hormonal-balance-endocrine-health",
+        "subcategory": "blood-sugar-imbalance-prediabetes"
+      },
+      {
+        "path": "/consultations/hormonal-balance-endocrine-health/pcos-pcod",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "hormonal-balance-endocrine-health",
+        "subcategory": "pcos-pcod"
+      },
+      {
+        "path": "/consultations/hormonal-balance-endocrine-health/irregular-hormonal-cycles",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "hormonal-balance-endocrine-health",
+        "subcategory": "irregular-hormonal-cycles"
+      },
+      {
+        "path": "/consultations/womens-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/womens-health/pcos-pcod",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "womens-health",
+        "subcategory": "pcos-pcod"
+      },
+      {
+        "path": "/consultations/womens-health/irregular-painful-periods",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "womens-health",
+        "subcategory": "irregular-painful-periods"
+      },
+      {
+        "path": "/consultations/womens-health/menstrual-cramps",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "womens-health",
+        "subcategory": "menstrual-cramps"
+      },
+      {
+        "path": "/consultations/womens-health/menopause-support",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "womens-health",
+        "subcategory": "menopause-support"
+      },
+      {
+        "path": "/consultations/womens-health/fertility-support",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "womens-health",
+        "subcategory": "fertility-support"
+      },
+      {
+        "path": "/consultations/womens-health/endometriosis",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "womens-health",
+        "subcategory": "endometriosis"
+      },
+      {
+        "path": "/consultations/womens-health/hormonal-acne",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "womens-health",
+        "subcategory": "hormonal-acne"
+      },
+      {
+        "path": "/consultations/womens-health/vaginal-dryness-ph-imbalance",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "womens-health",
+        "subcategory": "vaginal-dryness-ph-imbalance"
+      },
+      {
+        "path": "/consultations/mens-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/mens-health/erectile-dysfunction",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mens-health",
+        "subcategory": "erectile-dysfunction"
+      },
+      {
+        "path": "/consultations/mens-health/premature-ejaculation",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mens-health",
+        "subcategory": "premature-ejaculation"
+      },
+      {
+        "path": "/consultations/mens-health/low-testosterone",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mens-health",
+        "subcategory": "low-testosterone"
+      },
+      {
+        "path": "/consultations/mens-health/prostate-health",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mens-health",
+        "subcategory": "prostate-health"
+      },
+      {
+        "path": "/consultations/mens-health/male-infertility",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mens-health",
+        "subcategory": "male-infertility"
+      },
+      {
+        "path": "/consultations/mens-health/hair-loss-baldness",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mens-health",
+        "subcategory": "hair-loss-baldness"
+      },
+      {
+        "path": "/consultations/mens-health/stress-management",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "mens-health",
+        "subcategory": "stress-management"
+      },
+      {
+        "path": "/consultations/weight-metabolic-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/weight-metabolic-health/obesity-weight-gain",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "weight-metabolic-health",
+        "subcategory": "obesity-weight-gain"
+      },
+      {
+        "path": "/consultations/weight-metabolic-health/underweight-poor-appetite",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "weight-metabolic-health",
+        "subcategory": "underweight-poor-appetite"
+      },
+      {
+        "path": "/consultations/weight-metabolic-health/high-cholesterol",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "weight-metabolic-health",
+        "subcategory": "high-cholesterol"
+      },
+      {
+        "path": "/consultations/weight-metabolic-health/metabolic-syndrome",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "weight-metabolic-health",
+        "subcategory": "metabolic-syndrome"
+      },
+      {
+        "path": "/consultations/weight-metabolic-health/type-2-diabetes-support",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "weight-metabolic-health",
+        "subcategory": "type-2-diabetes-support"
+      },
+      {
+        "path": "/consultations/skin-hair-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/skin-hair-health/acne-pimples",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "skin-hair-health",
+        "subcategory": "acne-pimples"
+      },
+      {
+        "path": "/consultations/skin-hair-health/hair-fall-thinning",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "skin-hair-health",
+        "subcategory": "hair-fall-thinning"
+      },
+      {
+        "path": "/consultations/skin-hair-health/dry-oily-skin",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "skin-hair-health",
+        "subcategory": "dry-oily-skin"
+      },
+      {
+        "path": "/consultations/skin-hair-health/psoriasis-eczema",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "skin-hair-health",
+        "subcategory": "psoriasis-eczema"
+      },
+      {
+        "path": "/consultations/skin-hair-health/premature-graying",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "skin-hair-health",
+        "subcategory": "premature-graying"
+      },
+      {
+        "path": "/consultations/skin-hair-health/dandruff-scalp-infections",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "skin-hair-health",
+        "subcategory": "dandruff-scalp-infections"
+      },
+      {
+        "path": "/consultations/joint-bone-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/joint-bone-health/osteoarthritis",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "joint-bone-health",
+        "subcategory": "osteoarthritis"
+      },
+      {
+        "path": "/consultations/joint-bone-health/rheumatoid-arthritis",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "joint-bone-health",
+        "subcategory": "rheumatoid-arthritis"
+      },
+      {
+        "path": "/consultations/joint-bone-health/gout",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "joint-bone-health",
+        "subcategory": "gout"
+      },
+      {
+        "path": "/consultations/joint-bone-health/back-pain-sciatica",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "joint-bone-health",
+        "subcategory": "back-pain-sciatica"
+      },
+      {
+        "path": "/consultations/joint-bone-health/weak-bones-osteoporosis",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "joint-bone-health",
+        "subcategory": "weak-bones-osteoporosis"
+      },
+      {
+        "path": "/consultations/liver-kidney-detox",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/liver-kidney-detox/fatty-liver",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "liver-kidney-detox",
+        "subcategory": "fatty-liver"
+      },
+      {
+        "path": "/consultations/liver-kidney-detox/liver-detox",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "liver-kidney-detox",
+        "subcategory": "liver-detox"
+      },
+      {
+        "path": "/consultations/liver-kidney-detox/kidney-stones",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "liver-kidney-detox",
+        "subcategory": "kidney-stones"
+      },
+      {
+        "path": "/consultations/liver-kidney-detox/recurrent-uti",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "liver-kidney-detox",
+        "subcategory": "recurrent-uti"
+      },
+      {
+        "path": "/consultations/liver-kidney-detox/urinary-incontinence",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "liver-kidney-detox",
+        "subcategory": "urinary-incontinence"
+      },
+      {
+        "path": "/consultations/heart-circulatory-health",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/heart-circulatory-health/high-blood-pressure",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "heart-circulatory-health",
+        "subcategory": "high-blood-pressure"
+      },
+      {
+        "path": "/consultations/heart-circulatory-health/heart-palpitations",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "heart-circulatory-health",
+        "subcategory": "heart-palpitations"
+      },
+      {
+        "path": "/consultations/heart-circulatory-health/high-cholesterol",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "heart-circulatory-health",
+        "subcategory": "high-cholesterol"
+      },
+      {
+        "path": "/consultations/heart-circulatory-health/poor-circulation",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "heart-circulatory-health",
+        "subcategory": "poor-circulation"
+      },
+      {
+        "path": "/consultations/heart-circulatory-health/cardiac-weakness",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "heart-circulatory-health",
+        "subcategory": "cardiac-weakness"
+      },
+      {
+        "path": "/consultations/childrens-wellness",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/childrens-wellness/poor-appetite-weak-digestion",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "childrens-wellness",
+        "subcategory": "poor-appetite-weak-digestion"
+      },
+      {
+        "path": "/consultations/childrens-wellness/frequent-infections",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "childrens-wellness",
+        "subcategory": "frequent-infections"
+      },
+      {
+        "path": "/consultations/childrens-wellness/sleep-issues-restlessness",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "childrens-wellness",
+        "subcategory": "sleep-issues-restlessness"
+      },
+      {
+        "path": "/consultations/childrens-wellness/adhd-hyperactivity",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "childrens-wellness",
+        "subcategory": "adhd-hyperactivity"
+      },
+      {
+        "path": "/consultations/childrens-wellness/growth-development-issues",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "childrens-wellness",
+        "subcategory": "growth-development-issues"
+      },
+      {
+        "path": "/consultations/senior-elderly-care",
+        "type": "consultation-category",
+        "priority": "medium",
+        "category": null,
+        "subcategory": null
+      },
+      {
+        "path": "/consultations/senior-elderly-care/memory-loss-dementia",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "senior-elderly-care",
+        "subcategory": "memory-loss-dementia"
+      },
+      {
+        "path": "/consultations/senior-elderly-care/weak-digestion",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "senior-elderly-care",
+        "subcategory": "weak-digestion"
+      },
+      {
+        "path": "/consultations/senior-elderly-care/joint-degeneration",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "senior-elderly-care",
+        "subcategory": "joint-degeneration"
+      },
+      {
+        "path": "/consultations/senior-elderly-care/chronic-pain",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "senior-elderly-care",
+        "subcategory": "chronic-pain"
+      },
+      {
+        "path": "/consultations/senior-elderly-care/insomnia-light-sleep",
+        "type": "consultation-subcategory",
+        "priority": "medium",
+        "category": "senior-elderly-care",
+        "subcategory": "insomnia-light-sleep"
+      }
+    ]
+  }
+}
