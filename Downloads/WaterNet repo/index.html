@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WATERNET — The Circle of Blue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --blue-900: #042C53;
+  --blue-800: #0C447C;
+  --blue-700: #185FA5;
+  --blue-600: #2272C3;
+  --blue-400: #378ADD;
+  --blue-200: #85B7EB;
+  --blue-100: #B5D4F4;
+  --blue-50:  #E6F1FB;
+  --teal-700: #0F6E56;
+  --teal-500: #1D9E75;
+  --teal-200: #5DCAA5;
+  --teal-50:  #E1F5EE;
+  --gray-900: #1a1a2e;
+  --gray-700: #444;
+  --gray-500: #6b7280;
+  --gray-300: #d1d5db;
+  --gray-100: #f3f4f6;
+  --gray-50:  #f9fafb;
+  --white:    #ffffff;
+  --danger:   #E24B4A;
+  --warning:  #BA7517;
+  --success:  #3B6D11;
+  --font-main: 'DM Sans', sans-serif;
+  --font-display: 'DM Serif Display', serif;
+  --shadow-sm: 0 1px 3px rgba(4,44,83,0.08);
+  --shadow-md: 0 4px 16px rgba(4,44,83,0.12);
+  --shadow-lg: 0 8px 32px rgba(4,44,83,0.16);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-main); background: var(--white); color: var(--gray-900); overflow-x: hidden; }
+
+/* ── UTILITIES ── */
+.hidden { display: none !important; }
+.live-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--teal-500); animation: pulse 1.6s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.85)} }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+.badge-online { background: var(--teal-50); color: var(--teal-700); }
+.badge-warn   { background: #FAEEDA; color: var(--warning); }
+.badge-offline{ background: #FCEBEB; color: var(--danger); }
+.badge-blue   { background: var(--blue-50); color: var(--blue-700); }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: var(--radius-sm); font-family: var(--font-main); font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: all .18s; text-decoration: none; }
+.btn-primary  { background: var(--blue-700); color: #fff; }
+.btn-primary:hover { background: var(--blue-800); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-outline  { background: transparent; color: var(--blue-700); border: 1.5px solid var(--blue-700); }
+.btn-outline:hover { background: var(--blue-50); }
+.btn-ghost    { background: transparent; color: var(--gray-500); border: 1px solid var(--gray-300); }
+.btn-ghost:hover { background: var(--gray-50); }
+.btn-sm { padding: 7px 14px; font-size: 12px; }
+.btn-danger { background: #FCEBEB; color: var(--danger); border: none; }
+.btn-danger:hover { background: #F7C1C1; }
+
+/* ── PAGES ── */
+.page { display: none; }
+.page.active { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* ─── LOGIN PAGE ─── */
+#page-login { background: var(--blue-900); align-items: center; justify-content: center; }
+.login-wrap { display: grid; grid-template-columns: 1fr 420px; min-height: 100vh; width: 100%; }
+.login-left { background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 60%, var(--blue-700) 100%); display: flex; flex-direction: column; justify-content: center; padding: 60px; position: relative; overflow: hidden; }
+.login-left::before { content:''; position:absolute; top:-120px; right:-120px; width:400px; height:400px; border-radius:50%; background: rgba(55,138,221,0.12); }
+.login-left::after  { content:''; position:absolute; bottom:-80px; left:-80px; width:280px; height:280px; border-radius:50%; background: rgba(29,158,117,0.1); }
+.login-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 48px; }
+.brand-circle { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2); }
+.brand-name { font-size: 22px; font-weight: 600; color: #fff; letter-spacing: 1px; }
+.brand-tagline { font-size: 12px; color: var(--blue-200); margin-top: 2px; }
+.login-headline { font-family: var(--font-display); font-size: 44px; color: #fff; line-height: 1.15; margin-bottom: 20px; }
+.login-headline em { color: var(--teal-200); font-style: italic; }
+.login-desc { font-size: 15px; color: var(--blue-100); line-height: 1.7; max-width: 400px; margin-bottom: 40px; }
+.login-stats { display: flex; gap: 32px; }
+.lstat { }
+.lstat-num { font-size: 28px; font-weight: 600; color: #fff; }
+.lstat-lbl { font-size: 12px; color: var(--blue-200); margin-top: 2px; }
+.login-right { background: var(--white); display: flex; align-items: center; justify-content: center; padding: 40px; }
+.login-box { width: 100%; max-width: 360px; }
+.login-box h2 { font-size: 24px; font-weight: 600; margin-bottom: 6px; color: var(--blue-900); }
+.login-box p { font-size: 14px; color: var(--gray-500); margin-bottom: 32px; }
+.form-group { margin-bottom: 18px; }
+.form-label { display: block; font-size: 12px; font-weight: 500; color: var(--gray-700); margin-bottom: 6px; }
+.form-input { width: 100%; padding: 11px 14px; border: 1.5px solid var(--gray-300); border-radius: var(--radius-sm); font-family: var(--font-main); font-size: 14px; color: var(--gray-900); background: var(--white); transition: border-color .15s; outline: none; }
+.form-input:focus { border-color: var(--blue-400); box-shadow: 0 0 0 3px rgba(55,138,221,0.12); }
+.role-tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+.role-tab { flex: 1; padding: 10px; border: 1.5px solid var(--gray-300); border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; cursor: pointer; text-align: center; color: var(--gray-500); background: var(--white); transition: all .15s; }
+.role-tab.active { border-color: var(--blue-700); background: var(--blue-50); color: var(--blue-700); }
+.login-submit { width: 100%; padding: 13px; background: var(--blue-700); color: #fff; border: none; border-radius: var(--radius-sm); font-family: var(--font-main); font-size: 15px; font-weight: 500; cursor: pointer; transition: background .15s; }
+.login-submit:hover { background: var(--blue-800); }
+.login-hint { font-size: 11px; color: var(--gray-500); text-align: center; margin-top: 16px; }
+.login-hint a { color: var(--blue-600); cursor: pointer; }
+
+/* ─── SHARED APP SHELL ─── */
+.app-shell { display: flex; height: 100vh; overflow: hidden; }
+.sidebar { width: 240px; min-width: 240px; background: var(--blue-900); display: flex; flex-direction: column; }
+.sidebar-top { padding: 24px 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sb-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 0; }
+.sb-brand-circle { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sb-brand-name { font-size: 15px; font-weight: 600; color: #fff; }
+.sb-brand-sub  { font-size: 10px; color: var(--blue-200); margin-top: 1px; }
+.sidebar-nav { flex: 1; padding: 16px 10px; overflow-y: auto; }
+.nav-section-label { font-size: 10px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--blue-400); padding: 0 8px; margin: 16px 0 6px; }
+.nav-section-label:first-child { margin-top: 0; }
+.nav-item { display: flex; align-items: center; gap: 11px; padding: 9px 10px; border-radius: var(--radius-sm); cursor: pointer; color: var(--blue-100); font-size: 13px; font-weight: 400; transition: all .15s; margin-bottom: 2px; text-decoration: none; }
+.nav-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
+.nav-item.active { background: var(--blue-700); color: #fff; font-weight: 500; }
+.nav-item .ni-icon { width: 20px; text-align: center; font-size: 14px; }
+.nav-badge { background: var(--danger); color: #fff; font-size: 9px; padding: 1px 5px; border-radius: 10px; margin-left: auto; }
+.sidebar-footer { padding: 14px 10px; border-top: 1px solid rgba(255,255,255,0.08); }
+.user-chip { display: flex; align-items: center; gap: 10px; padding: 9px 10px; background: rgba(255,255,255,0.07); border-radius: var(--radius-sm); }
+.user-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--blue-600); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff; flex-shrink: 0; }
+.user-name { font-size: 12px; font-weight: 500; color: #fff; }
+.user-role { font-size: 10px; color: var(--blue-200); }
+.user-logout { margin-left: auto; cursor: pointer; color: var(--blue-200); font-size: 14px; }
+.user-logout:hover { color: #fff; }
+.main-area { flex: 1; overflow-y: auto; display: flex; flex-direction: column; background: var(--gray-50); }
+.topbar { background: var(--white); border-bottom: 1px solid var(--gray-300); padding: 0 28px; height: 60px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; position: sticky; top: 0; z-index: 10; }
+.topbar-left h1 { font-size: 16px; font-weight: 600; color: var(--blue-900); }
+.topbar-left p  { font-size: 12px; color: var(--gray-500); margin-top: 1px; }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.tb-live { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--teal-700); font-weight: 500; }
+.tb-select { font-size: 12px; padding: 6px 12px; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); background: var(--white); color: var(--gray-700); cursor: pointer; outline: none; }
+.page-body { padding: 24px 28px; flex: 1; }
+
+/* ─── METRIC CARDS ─── */
+.metrics-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 24px; }
+.metric-card { background: var(--white); border: 1px solid var(--gray-300); border-radius: var(--radius-md); padding: 18px 20px; }
+.mc-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 12px; }
+.mc-icon.blue   { background: var(--blue-50); color: var(--blue-700); }
+.mc-icon.teal   { background: var(--teal-50); color: var(--teal-700); }
+.mc-icon.amber  { background: #FAEEDA; color: var(--warning); }
+.mc-icon.green  { background: #EAF3DE; color: var(--success); }
+.mc-icon.red    { background: #FCEBEB; color: var(--danger); }
+.mc-val { font-size: 26px; font-weight: 600; color: var(--blue-900); line-height: 1; }
+.mc-lbl { font-size: 12px; color: var(--gray-500); margin-top: 4px; }
+.mc-delta { font-size: 11px; margin-top: 8px; display: flex; align-items: center; gap: 4px; }
+.delta-up   { color: var(--success); }
+.delta-down { color: var(--danger); }
+.delta-warn { color: var(--warning); }
+
+/* ─── MACHINES GRID ─── */
+.machines-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-bottom: 24px; }
+.machine-card { background: var(--white); border: 1px solid var(--gray-300); border-radius: var(--radius-md); padding: 18px; cursor: pointer; transition: box-shadow .18s, border-color .18s; }
+.machine-card:hover { box-shadow: var(--shadow-md); border-color: var(--blue-200); }
+.machine-card.selected { border: 2px solid var(--blue-700); }
+.mc-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+.mc-id   { font-size: 14px; font-weight: 600; color: var(--blue-900); }
+.mc-loc  { font-size: 11px; color: var(--gray-500); margin-top: 3px; }
+.sensor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.sensor-box { background: var(--gray-50); border-radius: var(--radius-sm); padding: 10px 12px; }
+.sb-lbl { font-size: 10px; color: var(--gray-500); margin-bottom: 3px; text-transform: uppercase; letter-spacing: .5px; }
+.sb-val { font-size: 20px; font-weight: 600; color: var(--blue-900); }
+.sb-unit{ font-size: 11px; font-weight: 400; color: var(--gray-500); }
+.sb-bar-wrap { height: 3px; background: var(--gray-300); border-radius: 3px; margin-top: 6px; }
+.sb-bar { height: 3px; border-radius: 3px; transition: width .5s; }
+.bar-blue   { background: var(--blue-400); }
+.bar-teal   { background: var(--teal-500); }
+.bar-amber  { background: #BA7517; }
+.bar-green  { background: #639922; }
+.mc-foot { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--gray-100); display: flex; justify-content: space-between; align-items: center; }
+.mc-foot-stat { font-size: 11px; color: var(--gray-500); }
+.mc-foot-stat strong { color: var(--blue-900); }
+.offline-placeholder { text-align: center; padding: 20px 0 8px; color: var(--gray-500); font-size: 12px; }
+.offline-placeholder i { font-size: 28px; display: block; margin-bottom: 6px; color: var(--gray-300); }
+
+/* ─── DATA TABLE ─── */
+.data-table-wrap { background: var(--white); border: 1px solid var(--gray-300); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 24px; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { padding: 11px 16px; text-align: left; font-size: 11px; font-weight: 500; color: var(--gray-500); text-transform: uppercase; letter-spacing: .5px; background: var(--gray-50); border-bottom: 1px solid var(--gray-300); }
+.data-table td { padding: 12px 16px; border-bottom: 1px solid var(--gray-100); vertical-align: middle; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--gray-50); }
+.data-table .warn-val { color: var(--warning); font-weight: 600; }
+.data-table .ok-val   { color: var(--success); }
+
+/* ─── PANEL ROW ─── */
+.panel-row { display: grid; grid-template-columns: 1fr 320px; gap: 16px; margin-bottom: 24px; }
+.panel { background: var(--white); border: 1px solid var(--gray-300); border-radius: var(--radius-md); padding: 20px; }
+.panel-title { font-size: 14px; font-weight: 600; color: var(--blue-900); margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
+.chart-wrap { position: relative; width: 100%; height: 220px; }
+
+/* ─── ALERTS ─── */
+.alert-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
+.alert-item:last-child { border-bottom: none; }
+.alert-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.ai-warn  { background: #FAEEDA; color: var(--warning); }
+.ai-ok    { background: var(--teal-50); color: var(--teal-700); }
+.ai-info  { background: var(--blue-50); color: var(--blue-700); }
+.ai-error { background: #FCEBEB; color: var(--danger); }
+.alert-body { flex: 1; }
+.alert-text { font-size: 13px; color: var(--gray-900); line-height: 1.45; }
+.alert-time { font-size: 11px; color: var(--gray-500); margin-top: 3px; }
+
+/* ─── REGISTER FORM ─── */
+.register-wrap { max-width: 620px; }
+.register-card { background: var(--white); border: 1px solid var(--gray-300); border-radius: var(--radius-md); padding: 28px; margin-bottom: 16px; }
+.register-card h3 { font-size: 15px; font-weight: 600; color: var(--blue-900); margin-bottom: 4px; }
+.register-card p  { font-size: 13px; color: var(--gray-500); margin-bottom: 22px; }
+.form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-grid-1 { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.form-actions { display: flex; gap: 10px; margin-top: 20px; }
+.wifi-info { display: flex; align-items: flex-start; gap: 10px; background: var(--blue-50); border-radius: var(--radius-sm); padding: 12px 14px; margin-top: 16px; }
+.wifi-info i { color: var(--blue-600); margin-top: 1px; flex-shrink: 0; }
+.wifi-info p  { font-size: 12px; color: var(--blue-800); line-height: 1.5; }
+.success-banner { display: flex; align-items: center; gap: 10px; background: var(--teal-50); border: 1px solid var(--teal-200); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 13px; color: var(--teal-700); margin-top: 14px; }
+
+/* ─── ADMIN PANEL ─── */
+.admin-client-row { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-bottom: 24px; }
+.admin-client-card { background: var(--white); border: 1px solid var(--gray-300); border-radius: var(--radius-md); padding: 18px 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: box-shadow .18s; }
+.admin-client-card:hover { box-shadow: var(--shadow-md); }
+.client-logo-circle { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.client-info-name { font-size: 14px; font-weight: 600; color: var(--blue-900); }
+.client-info-meta { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+.client-stats-row { display: flex; gap: 16px; margin-left: auto; text-align: right; }
+.cstat-val { font-size: 16px; font-weight: 600; color: var(--blue-900); }
+.cstat-lbl { font-size: 10px; color: var(--gray-500); }
+.section-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.section-toolbar h2 { font-size: 14px; font-weight: 600; color: var(--blue-900); }
+.search-input { padding: 8px 14px; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); font-family: var(--font-main); font-size: 13px; outline: none; width: 220px; }
+.search-input:focus { border-color: var(--blue-400); }
+
+/* ─── ABOUT / FEATURES / CONTACT (marketing) ─── */
+.marketing-page { background: var(--white); }
+.marketing-nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--gray-300); padding: 0 60px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+.mnav-brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+.mnav-brand-circle { width: 36px; height: 36px; border-radius: 50%; background: var(--blue-900); display: flex; align-items: center; justify-content: center; }
+.mnav-brand-name { font-size: 16px; font-weight: 600; color: var(--blue-900); }
+.mnav-links { display: flex; gap: 4px; align-items: center; }
+.mnav-link { padding: 8px 14px; border-radius: var(--radius-sm); font-size: 14px; color: var(--gray-700); cursor: pointer; transition: background .15s; text-decoration: none; }
+.mnav-link:hover { background: var(--gray-100); }
+.mnav-link.active { color: var(--blue-700); font-weight: 500; }
+.marketing-section { padding: 72px 60px; max-width: 1120px; margin: 0 auto; }
+.section-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--blue-50); color: var(--blue-700); padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 16px; }
+.section-headline { font-family: var(--font-display); font-size: 40px; color: var(--blue-900); line-height: 1.2; margin-bottom: 14px; }
+.section-sub { font-size: 16px; color: var(--gray-500); line-height: 1.7; max-width: 580px; margin-bottom: 48px; }
+.feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.feature-card { background: var(--white); border: 1px solid var(--gray-300); border-radius: var(--radius-lg); padding: 28px; transition: box-shadow .2s, transform .2s; }
+.feature-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.fc-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
+.fc-title { font-size: 16px; font-weight: 600; color: var(--blue-900); margin-bottom: 8px; }
+.fc-desc  { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+.about-hero { background: var(--blue-900); color: #fff; padding: 80px 60px; }
+.about-hero-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-headline { font-family: var(--font-display); font-size: 44px; line-height: 1.2; margin-bottom: 18px; }
+.about-headline em { color: var(--teal-200); font-style: italic; }
+.about-desc { font-size: 16px; color: var(--blue-100); line-height: 1.75; }
+.about-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.about-stat { background: rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 20px; border: 1px solid rgba(255,255,255,0.12); }
+.astat-num { font-size: 36px; font-weight: 600; color: #fff; }
+.astat-lbl { font-size: 12px; color: var(--blue-200); margin-top: 4px; }
+.team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.team-card { background: var(--gray-50); border: 1px solid var(--gray-300); border-radius: var(--radius-md); padding: 24px; text-align: center; }
+.team-avatar { width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 600; color: #fff; }
+.team-name { font-size: 15px; font-weight: 600; color: var(--blue-900); }
+.team-title { font-size: 12px; color: var(--gray-500); margin-top: 3px; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.contact-form { background: var(--white); border: 1px solid var(--gray-300); border-radius: var(--radius-lg); padding: 32px; }
+.contact-form h3 { font-size: 20px; font-weight: 600; color: var(--blue-900); margin-bottom: 6px; }
+.contact-form p  { font-size: 14px; color: var(--gray-500); margin-bottom: 24px; }
+.contact-info-item { display: flex; gap: 14px; margin-bottom: 24px; }
+.ci-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--blue-50); display: flex; align-items: center; justify-content: center; color: var(--blue-700); font-size: 16px; flex-shrink: 0; }
+.ci-label { font-size: 12px; color: var(--gray-500); margin-bottom: 3px; }
+.ci-value { font-size: 14px; font-weight: 500; color: var(--blue-900); }
+.marketing-footer { background: var(--blue-900); color: var(--blue-200); text-align: center; padding: 28px 60px; font-size: 13px; }
+.marketing-footer a { color: var(--blue-400); cursor: pointer; }
+textarea.form-input { resize: vertical; min-height: 100px; }
+
+/* ─── SETTINGS ─── */
+.settings-grid { display: grid; grid-template-columns: 200px 1fr; gap: 20px; }
+.settings-tabs .st-tab { display: block; padding: 9px 14px; border-radius: var(--radius-sm); font-size: 13px; cursor: pointer; color: var(--gray-700); margin-bottom: 2px; }
+.settings-tabs .st-tab:hover { background: var(--gray-100); }
+.settings-tabs .st-tab.active { background: var(--blue-50); color: var(--blue-700); font-weight: 500; }
+.settings-panel { background: var(--white); border: 1px solid var(--gray-300); border-radius: var(--radius-md); padding: 28px; }
+.settings-panel h3 { font-size: 16px; font-weight: 600; color: var(--blue-900); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--gray-100); }
+.threshold-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
+.threshold-row:last-child { border-bottom: none; }
+.th-label { font-size: 13px; color: var(--gray-700); }
+.th-input { width: 80px; text-align: right; padding: 6px 10px; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); font-family: var(--font-main); font-size: 13px; }
+
+/* ─── RESPONSIVE/OVERFLOW ─── */
+@media (max-width: 900px) {
+  .machines-grid, .admin-client-row, .panel-row, .contact-grid { grid-template-columns: 1fr; }
+  .metrics-row { grid-template-columns: repeat(2,1fr); }
+  .feature-grid, .team-grid { grid-template-columns: 1fr 1fr; }
+  .about-hero-inner { grid-template-columns: 1fr; }
+  .marketing-section, .about-hero { padding: 48px 24px; }
+  .marketing-nav { padding: 0 20px; }
+  .login-wrap { grid-template-columns: 1fr; }
+  .login-left { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     LOGIN PAGE
+══════════════════════════════════════════════════════ -->
+<div id="page-login" class="page active">
+  <div class="login-wrap">
+    <div class="login-left">
+      <div class="login-brand">
+        <div class="brand-circle">
+          <i class="fa-solid fa-droplet" style="color:#85B7EB;font-size:20px;"></i>
+        </div>
+        <div>
+          <div class="brand-name">WATERNET</div>
+          <div class="brand-tagline">The Circle of Blue</div>
+        </div>
+      </div>
+      <div class="login-headline">Smart water,<br>smarter <em>planet.</em></div>
+      <div class="login-desc">Monitor your IoT water dispensers in real time — track TDS, pH, temperature, and water consumption from a single unified dashboard.</div>
+      <div class="login-stats">
+        <div class="lstat"><div class="lstat-num">500+</div><div class="lstat-lbl">Machines deployed</div></div>
+        <div class="lstat"><div class="lstat-num">80+</div><div class="lstat-lbl">Enterprise clients</div></div>
+        <div class="lstat"><div class="lstat-num">12M L</div><div class="lstat-lbl">Water purified</div></div>
+      </div>
+    </div>
+    <div class="login-right">
+      <div class="login-box">
+        <h2>Welcome back</h2>
+        <p>Sign in to your WATERNET portal</p>
+        <div class="role-tabs">
+          <div class="role-tab active" onclick="selectRole('client',this)"><i class="fa-solid fa-building" style="margin-right:5px;"></i>Client</div>
+          <div class="role-tab" onclick="selectRole('admin',this)"><i class="fa-solid fa-shield-halved" style="margin-right:5px;"></i>Admin</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input class="form-input" type="email" id="loginEmail" placeholder="you@company.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" id="loginPass" placeholder="••••••••">
+        </div>
+        <button class="login-submit" onclick="doLogin()">Sign in to dashboard</button>
+        <div class="login-hint"><a onclick="showPage('page-features')">Explore features →</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     CLIENT DASHBOARD
+══════════════════════════════════════════════════════ -->
+<div id="page-client" class="page">
+  <div class="app-shell">
+    <div class="sidebar">
+      <div class="sidebar-top">
+        <div class="sb-brand">
+          <div class="sb-brand-circle"><i class="fa-solid fa-droplet" style="color:#85B7EB;font-size:16px;"></i></div>
+          <div><div class="sb-brand-name">WATERNET</div><div class="sb-brand-sub">Client Portal</div></div>
+        </div>
+      </div>
+      <div class="sidebar-nav">
+        <div class="nav-section-label">Overview</div>
+        <a class="nav-item active" onclick="clientNav('client-dashboard',this)"><span class="ni-icon"><i class="fa-solid fa-gauge"></i></span>Dashboard</a>
+        <a class="nav-item" onclick="clientNav('client-machines',this)"><span class="ni-icon"><i class="fa-solid fa-server"></i></span>My Machines</a>
+        <a class="nav-item" onclick="clientNav('client-register',this)"><span class="ni-icon"><i class="fa-solid fa-plus"></i></span>Register Machine</a>
+        <div class="nav-section-label">Insights</div>
+        <a class="nav-item" onclick="clientNav('client-analytics',this)"><span class="ni-icon"><i class="fa-solid fa-chart-line"></i></span>Analytics</a>
+        <a class="nav-item" onclick="clientNav('client-alerts',this)"><span class="ni-icon"><i class="fa-solid fa-bell"></i></span>Alerts <span class="nav-badge">3</span></a>
+        <div class="nav-section-label">Account</div>
+        <a class="nav-item" onclick="clientNav('client-settings',this)"><span class="ni-icon"><i class="fa-solid fa-gear"></i></span>Settings</a>
+        <a class="nav-item" onclick="showPage('page-features')"><span class="ni-icon"><i class="fa-solid fa-circle-info"></i></span>About WATERNET</a>
+      </div>
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar" id="client-avatar-sb">GC</div>
+          <div><div class="user-name" id="client-name-sb">Google Corp</div><div class="user-role">Client Admin</div></div>
+          <div class="user-logout" onclick="doLogout()" title="Sign out"><i class="fa-solid fa-right-from-bracket"></i></div>
+        </div>
+      </div>
+    </div>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="topbar-left">
+          <h1 id="client-page-title">Dashboard</h1>
+          <p id="client-page-sub">Overview of all your machines</p>
+        </div>
+        <div class="topbar-right">
+          <div class="tb-live"><div class="live-dot"></div>Live data</div>
+          <button class="btn btn-primary btn-sm" onclick="clientNav('client-register',null)"><i class="fa-solid fa-plus"></i>Add Machine</button>
+        </div>
+      </div>
+      <div class="page-body" id="client-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     ADMIN PANEL
+══════════════════════════════════════════════════════ -->
+<div id="page-admin" class="page">
+  <div class="app-shell">
+    <div class="sidebar">
+      <div class="sidebar-top">
+        <div class="sb-brand">
+          <div class="sb-brand-circle"><i class="fa-solid fa-shield-halved" style="color:#85B7EB;font-size:16px;"></i></div>
+          <div><div class="sb-brand-name">WATERNET</div><div class="sb-brand-sub">Admin Console</div></div>
+        </div>
+      </div>
+      <div class="sidebar-nav">
+        <div class="nav-section-label">Management</div>
+        <a class="nav-item active" onclick="adminNav('admin-overview',this)"><span class="ni-icon"><i class="fa-solid fa-gauge"></i></span>Overview</a>
+        <a class="nav-item" onclick="adminNav('admin-clients',this)"><span class="ni-icon"><i class="fa-solid fa-building"></i></span>Clients</a>
+        <a class="nav-item" onclick="adminNav('admin-machines',this)"><span class="ni-icon"><i class="fa-solid fa-server"></i></span>All Machines</a>
+        <a class="nav-item" onclick="adminNav('admin-alerts',this)"><span class="ni-icon"><i class="fa-solid fa-bell"></i></span>Alerts <span class="nav-badge">5</span></a>
+        <div class="nav-section-label">Config</div>
+        <a class="nav-item" onclick="adminNav('admin-users',this)"><span class="ni-icon"><i class="fa-solid fa-users"></i></span>User Accounts</a>
+        <a class="nav-item" onclick="adminNav('admin-settings',this)"><span class="ni-icon"><i class="fa-solid fa-gear"></i></span>System Settings</a>
+      </div>
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar" style="background:var(--danger);">SA</div>
+          <div><div class="user-name">Super Admin</div><div class="user-role">Full access</div></div>
+          <div class="user-logout" onclick="doLogout()" title="Sign out"><i class="fa-solid fa-right-from-bracket"></i></div>
+        </div>
+      </div>
+    </div>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="topbar-left">
+          <h1 id="admin-page-title">Admin Overview</h1>
+          <p id="admin-page-sub">System-wide machine and client monitoring</p>
+        </div>
+        <div class="topbar-right">
+          <div class="tb-live"><div class="live-dot"></div>Live</div>
+          <button class="btn btn-primary btn-sm" onclick="showPage('page-client')"><i class="fa-solid fa-user"></i>Client View</button>
+        </div>
+      </div>
+      <div class="page-body" id="admin-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     FEATURES PAGE
+══════════════════════════════════════════════════════ -->
+<div id="page-features" class="page marketing-page">
+  <nav class="marketing-nav">
+    <div class="mnav-brand" onclick="showPage('page-login')">
+      <div class="mnav-brand-circle"><i class="fa-solid fa-droplet" style="color:#85B7EB;font-size:16px;"></i></div>
+      <div class="mnav-brand-name">WATERNET</div>
+    </div>
+    <div class="mnav-links">
+      <a class="mnav-link active" onclick="showPage('page-features')">Features</a>
+      <a class="mnav-link" onclick="showPage('page-about')">About</a>
+      <a class="mnav-link" onclick="showPage('page-contact')">Contact</a>
+      <button class="btn btn-primary btn-sm" style="margin-left:8px;" onclick="showPage('page-login')">Client Login</button>
+    </div>
+  </nav>
+  <div class="marketing-section">
+    <div class="section-tag"><i class="fa-solid fa-microchip"></i>IoT Platform</div>
+    <div class="section-headline">Every drop, tracked<br>in real time.</div>
+    <div class="section-sub">WATERNET gives enterprises complete visibility over their water dispensing infrastructure — from water quality sensors to usage analytics — on one unified dashboard.</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="fc-icon mc-icon blue"><i class="fa-solid fa-wifi"></i></div>
+        <div class="fc-title">Wi-Fi Connected Dispensers</div>
+        <div class="fc-desc">Each WATERNET machine connects over Wi-Fi and streams sensor data to the cloud in real time, no manual readings required.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon mc-icon teal"><i class="fa-solid fa-flask"></i></div>
+        <div class="fc-title">Multi-Sensor Monitoring</div>
+        <div class="fc-desc">Track water temperature, TDS (Total Dissolved Solids), pH level, total purified output, and raw water consumed — all live.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon mc-icon green"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="fc-title">Usage Analytics</div>
+        <div class="fc-desc">Understand daily and weekly consumption trends, purification efficiency ratios, and filter replacement schedules with visual charts.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon mc-icon amber"><i class="fa-solid fa-bell"></i></div>
+        <div class="fc-title">Smart Alerts</div>
+        <div class="fc-desc">Receive automatic alerts when TDS exceeds safe thresholds, pH drops, machines go offline, or filters need replacement.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon mc-icon blue"><i class="fa-solid fa-building"></i></div>
+        <div class="fc-title">Multi-Client Portal</div>
+        <div class="fc-desc">Enterprise clients each get their own isolated dashboard with secure login — perfect for corporates, hospitals, campuses and hotels.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon mc-icon teal"><i class="fa-solid fa-leaf"></i></div>
+        <div class="fc-title">Sustainability Reporting</div>
+        <div class="fc-desc">Automatically calculate plastic bottles saved and CO₂ emissions reduced — share impact reports with stakeholders in one click.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon mc-icon green"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="fc-title">Admin Console</div>
+        <div class="fc-desc">Full admin panel for the WATERNET team to manage all clients, machines, user accounts, and system-wide alert thresholds.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon mc-icon amber"><i class="fa-solid fa-mobile-screen"></i></div>
+        <div class="fc-title">Mobile Friendly</div>
+        <div class="fc-desc">Responsive design works on any device. Facility managers can check machine status on their phone from anywhere.</div>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon mc-icon blue"><i class="fa-solid fa-plug"></i></div>
+        <div class="fc-title">Easy Machine Onboarding</div>
+        <div class="fc-desc">Register a new dispenser in under two minutes. Enter the serial number and location — the machine connects automatically over Wi-Fi.</div>
+      </div>
+    </div>
+  </div>
+  <div class="marketing-footer">© 2024 The Circle of Blue. All rights reserved. &nbsp;·&nbsp; <a onclick="showPage('page-contact')">Contact us</a> &nbsp;·&nbsp; <a onclick="showPage('page-about')">About</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     ABOUT PAGE
+══════════════════════════════════════════════════════ -->
+<div id="page-about" class="page marketing-page">
+  <nav class="marketing-nav">
+    <div class="mnav-brand" onclick="showPage('page-login')">
+      <div class="mnav-brand-circle"><i class="fa-solid fa-droplet" style="color:#85B7EB;font-size:16px;"></i></div>
+      <div class="mnav-brand-name">WATERNET</div>
+    </div>
+    <div class="mnav-links">
+      <a class="mnav-link" onclick="showPage('page-features')">Features</a>
+      <a class="mnav-link active" onclick="showPage('page-about')">About</a>
+      <a class="mnav-link" onclick="showPage('page-contact')">Contact</a>
+      <button class="btn btn-primary btn-sm" style="margin-left:8px;" onclick="showPage('page-login')">Client Login</button>
+    </div>
+  </nav>
+  <div class="about-hero">
+    <div class="about-hero-inner">
+      <div>
+        <div class="section-tag" style="background:rgba(255,255,255,0.1);color:var(--blue-100);"><i class="fa-solid fa-circle-info"></i>Our Mission</div>
+        <div class="about-headline">Reimagining how <em>enterprises</em> drink water.</div>
+        <div class="about-desc">The Circle of Blue was founded with one goal: eliminate single-use plastic water bottles from corporate environments, replacing them with intelligent, IoT-connected water dispensing systems that are sustainable, trackable, and beautiful.</div>
+      </div>
+      <div class="about-stats-grid">
+        <div class="about-stat"><div class="astat-num">80+</div><div class="astat-lbl">Enterprise clients across India</div></div>
+        <div class="about-stat"><div class="astat-num">500+</div><div class="astat-lbl">Machines deployed nationwide</div></div>
+        <div class="about-stat"><div class="astat-num">12M L</div><div class="astat-lbl">Water purified to date</div></div>
+        <div class="about-stat"><div class="astat-num">240K</div><div class="astat-lbl">Plastic bottles saved</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="marketing-section">
+    <div class="section-tag"><i class="fa-solid fa-users"></i>Our Team</div>
+    <div class="section-headline">Built by water enthusiasts.</div>
+    <div class="section-sub">We are engineers, sustainability advocates, and IoT specialists passionate about making every drop count.</div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--blue-700);">AK</div>
+        <div class="team-name">Arjun Kapoor</div>
+        <div class="team-title">Founder & CEO</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--teal-500);">PS</div>
+        <div class="team-name">Priya Sharma</div>
+        <div class="team-title">Head of IoT Engineering</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--blue-600);">RV</div>
+        <div class="team-name">Rahul Verma</div>
+        <div class="team-title">VP Sales & Partnerships</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:#854F0B;">SM</div>
+        <div class="team-name">Sneha Mehta</div>
+        <div class="team-title">Product Design Lead</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--teal-700);">DG</div>
+        <div class="team-name">Dev Gupta</div>
+        <div class="team-title">Head of Sustainability</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--blue-800);">NR</div>
+        <div class="team-name">Neha Rao</div>
+        <div class="team-title">Customer Success</div>
+      </div>
+    </div>
+    <div style="margin-top:60px;background:var(--blue-50);border-radius:var(--radius-xl);padding:48px;text-align:center;">
+      <div class="section-tag" style="margin:0 auto 16px;"><i class="fa-solid fa-award"></i>Recognition</div>
+      <div style="font-family:var(--font-display);font-size:32px;color:var(--blue-900);margin-bottom:12px;">Trusted by India's leading enterprises</div>
+      <div style="font-size:15px;color:var(--gray-500);max-width:500px;margin:0 auto 32px;">From global banks to tech giants, WATERNET has become the standard for sustainable workplace hydration.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+        ${['Google','Amazon','Microsoft','HDFC Bank','Goldman Sachs','Oracle','Dell','Wipro','Citibank','Nokia'].map(c=>`<span style="background:var(--white);border:1px solid var(--gray-300);border-radius:20px;padding:6px 16px;font-size:13px;color:var(--gray-700);">${c}</span>`).join('')}
+      </div>
+    </div>
+  </div>
+  <div class="marketing-footer">© 2024 The Circle of Blue. All rights reserved. &nbsp;·&nbsp; <a onclick="showPage('page-contact')">Contact us</a> &nbsp;·&nbsp; <a onclick="showPage('page-features')">Features</a></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     CONTACT PAGE
+══════════════════════════════════════════════════════ -->
+<div id="page-contact" class="page marketing-page">
+  <nav class="marketing-nav">
+    <div class="mnav-brand" onclick="showPage('page-login')">
+      <div class="mnav-brand-circle"><i class="fa-solid fa-droplet" style="color:#85B7EB;font-size:16px;"></i></div>
+      <div class="mnav-brand-name">WATERNET</div>
+    </div>
+    <div class="mnav-links">
+      <a class="mnav-link" onclick="showPage('page-features')">Features</a>
+      <a class="mnav-link" onclick="showPage('page-about')">About</a>
+      <a class="mnav-link active" onclick="showPage('page-contact')">Contact</a>
+      <button class="btn btn-primary btn-sm" style="margin-left:8px;" onclick="showPage('page-login')">Client Login</button>
+    </div>
+  </nav>
+  <div class="marketing-section">
+    <div class="section-tag"><i class="fa-solid fa-envelope"></i>Get in touch</div>
+    <div class="section-headline">Let's talk water.</div>
+    <div class="section-sub">Ready to deploy WATERNET at your organisation, or want a live demo? Our team is here to help.</div>
+    <div class="contact-grid">
+      <div class="contact-form">
+        <h3>Send us a message</h3>
+        <p>We'll get back to you within one business day.</p>
+        <div class="form-grid-2" style="margin-bottom:14px;">
+          <div class="form-group"><label class="form-label">Your name</label><input class="form-input" type="text" placeholder="Full name"></div>
+          <div class="form-group"><label class="form-label">Company</label><input class="form-input" type="text" placeholder="Organisation name"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="you@company.com"></div>
+        <div class="form-group"><label class="form-label">Subject</label>
+          <select class="form-input">
+            <option>Request a demo</option>
+            <option>Machine deployment enquiry</option>
+            <option>Technical support</option>
+            <option>Partnership</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" placeholder="Tell us about your requirements…"></textarea></div>
+        <button class="btn btn-primary" style="width:100%;" onclick="submitContact()"><i class="fa-solid fa-paper-plane"></i>Send message</button>
+        <div id="contact-success" class="success-banner hidden"><i class="fa-solid fa-check-circle" style="color:var(--teal-500);"></i>Thanks! We'll be in touch shortly.</div>
+      </div>
+      <div>
+        <div class="contact-info-item">
+          <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div><div class="ci-label">Head office</div><div class="ci-value">Gurugram, Haryana, India</div></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div><div class="ci-label">Email</div><div class="ci-value">hello@thecircleofblue.com</div></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon"><i class="fa-solid fa-phone"></i></div>
+          <div><div class="ci-label">Phone</div><div class="ci-value">+91 98100 XXXXX</div></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon"><i class="fa-solid fa-clock"></i></div>
+          <div><div class="ci-label">Business hours</div><div class="ci-value">Mon–Sat, 9 AM – 7 PM IST</div></div>
+        </div>
+        <div style="background:var(--blue-50);border-radius:var(--radius-md);padding:24px;margin-top:8px;">
+          <div style="font-size:15px;font-weight:600;color:var(--blue-900);margin-bottom:8px;">Ready for a demo?</div>
+          <div style="font-size:14px;color:var(--gray-500);line-height:1.6;margin-bottom:16px;">See WATERNET live — we'll walk you through machine installation, dashboard setup, and real-time monitoring in under 30 minutes.</div>
+          <button class="btn btn-primary" onclick="showPage('page-login')"><i class="fa-solid fa-play"></i>Try the demo dashboard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="marketing-footer">© 2024 The Circle of Blue. All rights reserved. &nbsp;·&nbsp; <a onclick="showPage('page-about')">About us</a> &nbsp;·&nbsp; <a onclick="showPage('page-features')">Features</a></div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════
+   DATA
+═══════════════════════════════════════ */
+const CLIENTS = {
+  google:   { name:'Google',         initials:'GC', color:'#185FA5', city:'Bangalore',  email:'admin@google.com',    defaultPassword:'demo@123', plan:'Enterprise', machines:['WN-G001','WN-G002','WN-G003','WN-G004'] },
+  amazon:   { name:'Amazon India',   initials:'AI', color:'#BA7517', city:'Haryana',    email:'admin@amazon.com',    defaultPassword:'demo@123', plan:'Enterprise', machines:['WN-A001','WN-A002'] },
+  jpmorgan: { name:'JPMorgan Chase', initials:'JP', color:'#A32D2D', city:'Hyderabad',  email:'admin@jpmorgan.com',  defaultPassword:'demo@123', plan:'Enterprise', machines:['WN-J001','WN-J002'] },
+  bcg:      { name:'BCG',            initials:'BCG',color:'#6D3E91', city:'Haryana',    email:'admin@BCG.com',       defaultPassword:'demo@123', plan:'Enterprise', machines:['WN-B001','WN-B002'] },
+  icici:    { name:'ICICI Bank',     initials:'IC', color:'#0F6E56', city:'New Delhi',  email:'admin@ICICI.com',     defaultPassword:'demo@123', plan:'Enterprise', machines:['WN-I001','WN-I002'] },
+  reliance: { name:'Reliance',       initials:'RI', color:'#C25D1E', city:'Mumbai',     email:'admin@Reliance.com',  defaultPassword:'demo@123', plan:'Enterprise', machines:['WN-R001','WN-R002'] },
+  waehq:    { name:'WAE HQ',         initials:'WE', color:'#2272C3', city:'Noida',      email:'admin@waecorp.com',   defaultPassword:'demo@123', plan:'Enterprise', machines:['WN-W001','WN-W002'] }
+};
+const MACHINES = {
+  'WN-G001':{ loc:'Floor 3, Lobby',        status:'online',  temp:23.4, tempHot:85.2, tempCold:8.1, tempAmbient:23.4, tds:48, ph:7.2, purified:1240, raw:1580, installed:'2023-06-12', tdsHistory:[52,49,47,50,48,46,48] },
+  'WN-G002':{ loc:'Cafeteria B',            status:'online',  temp:24.1, tempHot:84.6, tempCold:7.8, tempAmbient:24.1, tds:52, ph:7.0, purified:980,  raw:1220, installed:'2023-06-12', tdsHistory:[55,53,51,54,52,50,52] },
+  'WN-G003':{ loc:'Executive Suite',        status:'warn',    temp:26.8, tempHot:88.1, tempCold:9.4, tempAmbient:26.8, tds:78, ph:6.8, purified:320,  raw:430,  installed:'2023-07-20', tdsHistory:[61,66,70,74,76,77,78] },
+  'WN-G004':{ loc:'Server Room',            status:'offline', temp:null, tempHot:null, tempCold:null, tempAmbient:null, tds:null, ph:null, purified:560, raw:710, installed:'2023-07-20', tdsHistory:[58,58,58,null,null,null,null] },
+  'WN-A001':{ loc:'Warehouse A',            status:'online',  temp:22.9, tempHot:83.8, tempCold:7.2, tempAmbient:22.9, tds:44, ph:7.3, purified:2100, raw:2650, installed:'2023-03-05', tdsHistory:[46,45,43,44,44,43,44] },
+  'WN-A002':{ loc:'Office Block',           status:'online',  temp:23.6, tempHot:85.0, tempCold:8.0, tempAmbient:23.6, tds:51, ph:7.1, purified:1450, raw:1820, installed:'2023-03-05', tdsHistory:[53,52,50,51,52,51,51] },
+  'WN-J001':{ loc:'HQ Floor 22',            status:'online',  temp:23.0, tempHot:84.1, tempCold:7.5, tempAmbient:23.0, tds:46, ph:7.2, purified:730,  raw:920,  installed:'2024-01-08', tdsHistory:[48,47,46,46,47,45,46] },
+  'WN-J002':{ loc:'Trading Floor',          status:'online',  temp:22.5, tempHot:83.4, tempCold:7.1, tempAmbient:22.5, tds:43, ph:7.3, purified:1100, raw:1380, installed:'2024-01-08', tdsHistory:[45,44,43,43,44,42,43] },
+  'WN-B001':{ loc:'Strategy Hub, Floor 5',  status:'online',  temp:22.8, tempHot:84.0, tempCold:7.4, tempAmbient:22.8, tds:41, ph:7.3, purified:860,  raw:1090, installed:'2023-11-10', tdsHistory:[43,42,41,42,41,40,41] },
+  'WN-B002':{ loc:'Conference Suite',       status:'warn',    temp:25.6, tempHot:87.8, tempCold:9.2, tempAmbient:25.6, tds:77, ph:6.9, purified:390,  raw:510,  installed:'2023-11-10', tdsHistory:[64,68,72,74,76,77,77] },
+  'WN-I001':{ loc:'Branch Operations',      status:'online',  temp:23.2, tempHot:84.5, tempCold:7.6, tempAmbient:23.2, tds:45, ph:7.2, purified:1340, raw:1700, installed:'2023-05-20', tdsHistory:[47,46,44,45,46,44,45] },
+  'WN-I002':{ loc:'IT & Data Centre',       status:'online',  temp:21.9, tempHot:83.0, tempCold:6.8, tempAmbient:21.9, tds:38, ph:7.4, purified:980,  raw:1240, installed:'2023-05-20', tdsHistory:[40,39,38,39,38,37,38] },
+  'WN-R001':{ loc:'Refinery Admin Block',   status:'online',  temp:24.7, tempHot:86.1, tempCold:8.4, tempAmbient:24.7, tds:57, ph:7.1, purified:2400, raw:3000, installed:'2022-12-01', tdsHistory:[59,58,56,57,58,56,57] },
+  'WN-R002':{ loc:'Corporate HQ Lobby',     status:'online',  temp:23.3, tempHot:84.8, tempCold:7.7, tempAmbient:23.3, tds:50, ph:7.2, purified:1780, raw:2230, installed:'2022-12-01', tdsHistory:[52,51,50,51,50,49,50] },
+  'WN-W001':{ loc:'Assembly Floor A',       status:'online',  temp:23.9, tempHot:85.5, tempCold:8.0, tempAmbient:23.9, tds:42, ph:7.3, purified:1120, raw:1410, installed:'2024-02-14', tdsHistory:[44,43,42,43,42,41,42] },
+  'WN-W002':{ loc:'R&D Innovation Lab',     status:'online',  temp:22.4, tempHot:83.2, tempCold:7.0, tempAmbient:22.4, tds:36, ph:7.5, purified:940,  raw:1180, installed:'2024-02-14', tdsHistory:[38,37,36,37,36,35,36] }
+};
+
+let currentClient = 'google';
+let loginRole = 'client';
+let liveTimer = null;
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function selectRole(role, el) {
+  loginRole = role;
+  document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Map demo emails to client keys — password for all: demo@123
+const EMAIL_CLIENT_MAP = {
+  'admin@google.com':   'google',
+  'admin@amazon.com':   'amazon',
+  'admin@jpmorgan.com': 'jpmorgan',
+  'admin@bcg.com':      'bcg',
+  'admin@icici.com':    'icici',
+  'admin@reliance.com': 'reliance',
+  'admin@waecorp.com':  'waehq'
+};
+const DEMO_PASSWORD = 'demo@123';
+
+function showLoginError(msg) {
+  let errEl = document.getElementById('login-error');
+  if (!errEl) {
+    errEl = document.createElement('div');
+    errEl.id = 'login-error';
+    errEl.style.cssText = 'background:#FCEBEB;color:var(--danger);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-bottom:16px;display:flex;align-items:center;gap:8px;';
+    document.querySelector('.login-box').insertBefore(errEl, document.querySelector('.role-tabs'));
+  }
+  errEl.innerHTML = `<i class="fa-solid fa-exclamation-circle"></i> ${msg}`;
+  errEl.style.display = 'flex';
+}
+
+function hideLoginError() {
+  const errEl = document.getElementById('login-error');
+  if (errEl) errEl.style.display = 'none';
+}
+
+function doLogin() {
+  clearInterval(liveTimer);
+  const email    = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const password = document.getElementById('loginPass').value;
+  if (loginRole === 'admin') {
+    if (email !== 'admin@waternet.com' || password !== DEMO_PASSWORD) {
+      showLoginError('Invalid email or password.'); return;
+    }
+    hideLoginError();
+    showPage('page-admin');
+    renderAdmin('admin-overview');
+  } else {
+    const clientKey = EMAIL_CLIENT_MAP[email];
+    if (!clientKey || password !== DEMO_PASSWORD) {
+      showLoginError('Invalid email or password.'); return;
+    }
+    hideLoginError();
+    currentClient = clientKey;
+    const c = CLIENTS[currentClient];
+    document.getElementById('client-avatar-sb').textContent = c.initials;
+    document.getElementById('client-avatar-sb').style.background = c.color;
+    document.getElementById('client-name-sb').textContent = c.name;
+    showPage('page-client');
+    renderClientDash('client-dashboard');
+    startLive();
+  }
+}
+
+function doLogout() {
+  clearInterval(liveTimer);
+  showPage('page-login');
+}
+
+/* ═══════════════════════════════════════
+   CLIENT NAV
+═══════════════════════════════════════ */
+const clientMeta = {
+  'client-dashboard': ['Dashboard','Real-time machine overview'],
+  'client-machines':  ['My Machines','Manage all registered dispensers'],
+  'client-register':  ['Register Machine','Add a new dispenser to your account'],
+  'client-analytics': ['Analytics','Water usage trends and reports'],
+  'client-alerts':    ['Alerts','System events and sensor warnings'],
+  'client-settings':  ['Settings','Account and threshold configuration']
+};
+
+function clientNav(view, el) {
+  if (el) { document.querySelectorAll('#page-client .nav-item').forEach(n=>n.classList.remove('active')); el.classList.add('active'); }
+  const [t,s] = clientMeta[view] || ['Dashboard',''];
+  document.getElementById('client-page-title').textContent = t;
+  document.getElementById('client-page-sub').textContent = s;
+  renderClientDash(view);
+}
+
+/* changeClient removed — each client login is scoped to their own data only */
+
+/* ═══════════════════════════════════════
+   CLIENT RENDERS
+═══════════════════════════════════════ */
+function renderClientDash(view) {
+  const body = document.getElementById('client-body');
+  const machines = CLIENTS[currentClient].machines.map(id => ({id,...MACHINES[id]}));
+
+  if (view === 'client-dashboard') {
+    const total = machines.reduce((s,m)=>s+m.purified,0);
+    const online = machines.filter(m=>m.status==='online').length;
+    const warn   = machines.filter(m=>m.status==='warn').length;
+    const validM = machines.filter(m=>m.tds);
+    const avgTds = validM.length ? (validM.reduce((s,m)=>s+m.tds,0)/validM.length).toFixed(1) : '—';
+    body.innerHTML = `
+      <div class="metrics-row">
+        <div class="metric-card"><div class="mc-icon blue"><i class="fa-solid fa-server"></i></div><div class="mc-val">${machines.length}</div><div class="mc-lbl">Total machines</div><div class="mc-delta delta-up"><i class="fa-solid fa-circle" style="font-size:7px;"></i> ${online} online</div></div>
+        <div class="metric-card"><div class="mc-icon teal"><i class="fa-solid fa-droplet"></i></div><div class="mc-val">${total.toLocaleString()}<span style="font-size:14px;font-weight:400;color:var(--gray-500);margin-left:4px;">L</span></div><div class="mc-lbl">Purified today</div><div class="mc-delta delta-up"><i class="fa-solid fa-arrow-up"></i> 12% vs yesterday</div></div>
+        <div class="metric-card"><div class="mc-icon green"><i class="fa-solid fa-leaf"></i></div><div class="mc-val">${Math.round(total*0.02)}<span style="font-size:14px;font-weight:400;color:var(--gray-500);margin-left:4px;">kg</span></div><div class="mc-lbl">Plastic saved</div><div class="mc-delta delta-up"><i class="fa-solid fa-check"></i> Great impact</div></div>
+        <div class="metric-card"><div class="mc-icon amber"><i class="fa-solid fa-flask"></i></div><div class="mc-val">${avgTds}</div><div class="mc-lbl">Avg TDS (ppm)</div><div class="mc-delta ${parseFloat(avgTds)>70?'delta-warn':'delta-up'}">${parseFloat(avgTds)>70?'⚠ Check filters':'✓ Within range'}</div></div>
+      </div>
+      <div style="font-size:13px;font-weight:600;color:var(--blue-900);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;">
+        <span>Machine status</span>
+        <span style="font-size:11px;font-weight:400;color:var(--gray-500);">${online} online · ${warn} warning · ${machines.length-online-warn} offline</span>
+      </div>
+      <div class="machines-grid" id="machines-grid">${machines.map(m=>machineCardHTML(m)).join('')}</div>`;
+
+  } else if (view === 'client-machines') {
+    body.innerHTML = `
+      <div class="section-toolbar"><h2>All dispensers</h2><input class="search-input" placeholder="Search by ID or location…" oninput="filterTable(this.value)"></div>
+      <div class="data-table-wrap"><table class="data-table" id="machine-table">
+        <thead><tr><th>Machine ID</th><th>Location</th><th>Status</th><th>Temp (°C)</th><th>TDS (ppm)</th><th>pH</th><th>Purified (L)</th><th>Raw (L)</th><th>Installed</th><th>Actions</th></tr></thead>
+        <tbody>${machines.map(m=>`<tr>
+          <td style="font-weight:600;color:var(--blue-900);">${m.id}</td>
+          <td style="color:var(--gray-500);">${m.loc}</td>
+          <td><span class="badge ${m.status==='online'?'badge-online':m.status==='warn'?'badge-warn':'badge-offline'}">${m.status==='warn'?'⚠ Warning':m.status}</span></td>
+          <td>${m.temp??'—'}</td>
+          <td class="${m.tds>70?'warn-val':''}">${m.tds??'—'}</td>
+          <td class="${m.ph&&m.ph<7?'warn-val':''}">${m.ph??'—'}</td>
+          <td>${m.purified.toLocaleString()}</td>
+          <td>${m.raw.toLocaleString()}</td>
+          <td style="color:var(--gray-500);">${m.installed}</td>
+          <td><button class="btn btn-ghost btn-sm" onclick="openEditMachineModal('${m.id}')"><i class="fa-solid fa-edit"></i>Edit</button></td>
+        </tr>`).join('')}</tbody>
+      </table></div>
+
+      <!-- ── EDIT MACHINE MODAL ── -->
+      <div id="edit-machine-modal" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(4,44,83,0.45);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+        <div style="background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);width:100%;max-width:480px;padding:36px;position:relative;margin:20px;">
+          <button onclick="closeEditMachineModal()" style="position:absolute;top:16px;right:16px;background:var(--gray-100);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px;color:var(--gray-500);display:flex;align-items:center;justify-content:center;">×</button>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+            <div style="width:44px;height:44px;border-radius:12px;background:var(--blue-50);display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-server" style="color:var(--blue-700);font-size:18px;"></i></div>
+            <div><div style="font-size:17px;font-weight:600;color:var(--blue-900);">Edit machine</div><div style="font-size:13px;color:var(--gray-500);">Update machine ID and location</div></div>
+          </div>
+          <div class="form-grid-2" style="margin-bottom:14px;">
+            <div class="form-group">
+              <label class="form-label">Machine ID <span style="color:var(--danger);">*</span></label>
+              <input class="form-input" id="em-id" type="text" placeholder="e.g. WN-G001">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Location <span style="color:var(--danger);">*</span></label>
+              <input class="form-input" id="em-loc" type="text" placeholder="e.g. Floor 3, Lobby">
+            </div>
+          </div>
+          <div id="em-error" style="display:none;background:#FCEBEB;color:var(--danger);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-bottom:16px;"></div>
+          <div style="display:flex;gap:10px;justify-content:flex-end;">
+            <button class="btn btn-ghost" onclick="closeEditMachineModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="submitEditMachine()"><i class="fa-solid fa-floppy-disk"></i>Save changes</button>
+          </div>
+        </div>
+      </div>`;
+
+
+  } else if (view === 'client-register') {
+    body.innerHTML = `
+      <div class="register-wrap">
+        <div class="register-card">
+          <h3>Register a new dispenser</h3>
+          <p>Connect a new WATERNET device to your account. The machine will appear live once it connects over Wi-Fi.</p>
+          <div class="form-grid-2">
+            <div class="form-group"><label class="form-label">Device serial number</label><input class="form-input" type="text" placeholder="e.g. WN-2024-XXXX"></div>
+            <div class="form-group"><label class="form-label">Wi-Fi MAC address</label><input class="form-input" type="text" placeholder="AA:BB:CC:DD:EE:FF"></div>
+            <div class="form-group"><label class="form-label">Installation location</label><input class="form-input" type="text" placeholder="e.g. Floor 2, Lobby"></div>
+            <div class="form-group"><label class="form-label">Building / Campus</label><input class="form-input" type="text" placeholder="e.g. HQ, Gurugram"></div>
+            <div class="form-group"><label class="form-label">Facility contact name</label><input class="form-input" type="text" placeholder="Manager name"></div>
+            <div class="form-group"><label class="form-label">Facility contact email</label><input class="form-input" type="email" placeholder="manager@company.com"></div>
+          </div>
+          <div class="form-group" style="margin-top:14px;"><label class="form-label">Notes (optional)</label><input class="form-input" type="text" placeholder="e.g. Near main entrance, requires 240V socket"></div>
+          <div class="wifi-info">
+            <i class="fa-solid fa-wifi"></i>
+            <p>Ensure the dispenser is powered on and within Wi-Fi range. Once the serial number is validated, the machine will connect automatically and begin sending sensor data within 2–3 minutes.</p>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="doRegister()"><i class="fa-solid fa-check"></i>Register device</button>
+            <button class="btn btn-ghost" onclick="clientNav('client-dashboard',null)">Cancel</button>
+          </div>
+          <div id="reg-success" class="success-banner hidden"><i class="fa-solid fa-check-circle"></i>Device registered successfully! It will appear on your dashboard once connected.</div>
+        </div>
+      </div>`;
+
+  } else if (view === 'client-analytics') {
+    const labels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    const purData = [1100,1340,1520,1200,1680,900,1240];
+    const rawData = [1380,1680,1900,1510,2100,1120,1580];
+    // Build per-machine TDS trend data (average across machines per day)
+    const onlineMachines = machines.filter(m=>m.tdsHistory);
+    const avgTdsByDay = labels.map((_,i)=>{
+      const vals = onlineMachines.map(m=>m.tdsHistory[i]).filter(v=>v!=null);
+      return vals.length ? Math.round(vals.reduce((a,b)=>a+b,0)/vals.length) : null;
+    });
+    const maxTdsByDay = labels.map((_,i)=>{
+      const vals = onlineMachines.map(m=>m.tdsHistory[i]).filter(v=>v!=null);
+      return vals.length ? Math.max(...vals) : null;
+    });
+    // Temperature data (avg hot/cold/ambient across online machines)
+    const validT = machines.filter(m=>m.tempHot!=null);
+    const hotData    = labels.map((_,i)=>parseFloat((validT.reduce((s,m)=>s+m.tempHot,0)/validT.length+(i-3)*0.4).toFixed(1)));
+    const coldData   = labels.map((_,i)=>parseFloat((validT.reduce((s,m)=>s+m.tempCold,0)/validT.length+(i-3)*0.1).toFixed(1)));
+    const ambData    = labels.map((_,i)=>parseFloat((validT.reduce((s,m)=>s+m.tempAmbient,0)/validT.length+(i-3)*0.3).toFixed(1)));
+    const avgTDS = Math.round(avgTdsByDay.filter(Boolean).reduce((a,b)=>a+b,0)/avgTdsByDay.filter(Boolean).length);
+    const avgHot = (hotData.reduce((a,b)=>a+b,0)/hotData.length).toFixed(1);
+    const avgCold= (coldData.reduce((a,b)=>a+b,0)/coldData.length).toFixed(1);
+    body.innerHTML = `
+      <div class="metrics-row">
+        <div class="metric-card"><div class="mc-icon teal"><i class="fa-solid fa-droplet"></i></div><div class="mc-val">${machines.reduce((s,m)=>s+m.purified,0).toLocaleString()} L</div><div class="mc-lbl">Total purified this week</div></div>
+        <div class="metric-card"><div class="mc-icon blue"><i class="fa-solid fa-chart-bar"></i></div><div class="mc-val">${Math.round(machines.reduce((s,m)=>s+m.purified,0)/machines.reduce((s,m)=>s+m.raw,0)*100)}%</div><div class="mc-lbl">Purification efficiency</div></div>
+        <div class="metric-card"><div class="mc-icon amber"><i class="fa-solid fa-flask"></i></div><div class="mc-val">${avgTDS} <span style="font-size:13px;color:var(--gray-500);">ppm</span></div><div class="mc-lbl">Avg TDS this week</div><div class="mc-delta ${avgTDS>70?'delta-warn':'delta-up'}">${avgTDS>70?'⚠ Above threshold':'✓ Safe range'}</div></div>
+        <div class="metric-card"><div class="mc-icon red"><i class="fa-solid fa-temperature-full"></i></div><div class="mc-val">${avgHot}<span style="font-size:13px;color:var(--gray-500);">°C</span></div><div class="mc-lbl">Avg hot water temp</div></div>
+        <div class="metric-card"><div class="mc-icon blue"><i class="fa-solid fa-snowflake"></i></div><div class="mc-val">${avgCold}<span style="font-size:13px;color:var(--gray-500);">°C</span></div><div class="mc-lbl">Avg cold water temp</div></div>
+      </div>
+      <div class="panel" style="margin-bottom:16px;">
+        <div class="panel-title">Daily consumption — purified vs raw (litres)
+          <div style="display:flex;gap:16px;font-size:12px;font-weight:400;color:var(--gray-500);">
+            <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:3px;background:#378ADD;display:inline-block;border-radius:2px;"></span>Purified</span>
+            <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:3px;background:#B5D4F4;display:inline-block;border-radius:2px;"></span>Raw used</span>
+          </div>
+        </div>
+        <div class="chart-wrap" style="height:220px;"><canvas id="analyticsChart"></canvas></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div class="panel">
+          <div class="panel-title">TDS trend this week (ppm)
+            <div style="display:flex;gap:12px;font-size:12px;font-weight:400;color:var(--gray-500);">
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:3px;background:#BA7517;display:inline-block;border-radius:2px;"></span>Avg TDS</span>
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:3px;background:#E24B4A;display:inline-block;border-radius:2px;"></span>Peak TDS</span>
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:24px;height:1px;background:#E24B4A;display:inline-block;border-top:2px dashed #E24B4A;"></span>Threshold</span>
+            </div>
+          </div>
+          <div class="chart-wrap" style="height:200px;"><canvas id="tdsChart"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Temperature by mode (°C)
+            <div style="display:flex;gap:12px;font-size:12px;font-weight:400;color:var(--gray-500);">
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:3px;background:#E24B4A;display:inline-block;border-radius:2px;"></span>Hot</span>
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:3px;background:#378ADD;display:inline-block;border-radius:2px;"></span>Cold</span>
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:3px;background:#1D9E75;display:inline-block;border-radius:2px;"></span>Ambient</span>
+            </div>
+          </div>
+          <div class="chart-wrap" style="height:200px;"><canvas id="tempChart"></canvas></div>
+        </div>
+      </div>`;
+    setTimeout(()=>{
+      const ctx = document.getElementById('analyticsChart');
+      if(ctx) new Chart(ctx,{type:'bar',data:{labels,datasets:[{label:'Purified',data:purData,backgroundColor:'#378ADD',borderRadius:4},{label:'Raw used',data:rawData,backgroundColor:'#B5D4F4',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,ticks:{font:{size:11}}}}}});
+      const tdsCtx = document.getElementById('tdsChart');
+      if(tdsCtx) new Chart(tdsCtx,{type:'line',data:{labels,datasets:[
+        {label:'Avg TDS',data:avgTdsByDay,borderColor:'#BA7517',backgroundColor:'rgba(186,117,23,0.08)',tension:0.4,fill:true,pointRadius:3},
+        {label:'Peak TDS',data:maxTdsByDay,borderColor:'#E24B4A',backgroundColor:'transparent',tension:0.4,borderDash:[4,3],pointRadius:3}
+      ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},annotation:{annotations:{threshold:{type:'line',yMin:75,yMax:75,borderColor:'rgba(226,75,74,0.4)',borderWidth:1.5,borderDash:[5,4]}}}},scales:{x:{grid:{display:false}},y:{beginAtZero:false,min:30,suggestedMax:100,ticks:{font:{size:11}}}}}});
+      const tCtx = document.getElementById('tempChart');
+      if(tCtx) new Chart(tCtx,{type:'line',data:{labels,datasets:[
+        {label:'Hot',data:hotData,borderColor:'#E24B4A',backgroundColor:'rgba(226,75,74,0.06)',tension:0.4,fill:false,pointRadius:3},
+        {label:'Cold',data:coldData,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.06)',tension:0.4,fill:false,pointRadius:3},
+        {label:'Ambient',data:ambData,borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,0.06)',tension:0.4,fill:false,pointRadius:3}
+      ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{ticks:{font:{size:11},callback:v=>v+'°C'}}}}});
+    },80);
+
+  } else if (view === 'client-alerts') {
+    const alerts = [
+      {icon:'fa-triangle-exclamation',cls:'ai-warn',text:`TDS level high on <strong>WN-G003</strong> — 78 ppm (threshold: 75 ppm). Filter may need replacement.`,time:'2 min ago'},
+      {icon:'fa-wifi',cls:'ai-error',text:`<strong>WN-G004</strong> went offline. Last seen at 14:32 today. Check power or network.`,time:'18 min ago'},
+      {icon:'fa-flask',cls:'ai-warn',text:`pH on <strong>WN-M003</strong> dropped to 6.7 (normal range: 6.8–7.5). Water quality advisory issued.`,time:'1 hr ago'},
+      {icon:'fa-check',cls:'ai-ok',text:`<strong>WN-G001</strong> filter replaced. TDS back to normal at 48 ppm.`,time:'3 hr ago'},
+      {icon:'fa-droplet',cls:'ai-info',text:`<strong>WN-A001</strong> reached the 2,000 L purification milestone today.`,time:'5 hr ago'},
+      {icon:'fa-check',cls:'ai-ok',text:`System health check passed. All online machines reporting nominal sensor values.`,time:'8 hr ago'},
+    ];
+    body.innerHTML = `
+      <div class="panel" style="max-width:640px;">
+        <div class="panel-title">Recent alerts <span class="badge badge-offline" style="font-weight:400;">3 unread</span></div>
+        ${alerts.map(a=>`<div class="alert-item"><div class="alert-icon ${a.cls}"><i class="fa-solid ${a.icon}"></i></div><div class="alert-body"><div class="alert-text">${a.text}</div><div class="alert-time">${a.time}</div></div></div>`).join('')}
+      </div>`;
+
+  } else if (view === 'client-settings') {
+    const c = CLIENTS[currentClient];
+    body.innerHTML = `
+      <div class="settings-grid">
+        <div class="settings-tabs">
+          <div class="st-tab active" onclick="stTab(this,'s-account')">Account</div>
+          <div class="st-tab" onclick="stTab(this,'s-thresholds')">Thresholds</div>
+          <div class="st-tab" onclick="stTab(this,'s-notif')">Notifications</div>
+        </div>
+        <div>
+          <div class="settings-panel" id="s-account">
+            <h3>Account details</h3>
+            <div class="form-grid-2">
+              <div class="form-group"><label class="form-label">Organisation</label><input class="form-input" value="${c.name}" readonly></div>
+              <div class="form-group"><label class="form-label">Admin email</label><input class="form-input" value="${c.email}" readonly></div>
+              <div class="form-group"><label class="form-label">City</label><input class="form-input" value="${c.city}" readonly></div>
+              <div class="form-group"><label class="form-label">Plan</label><input class="form-input" value="${c.plan||'Enterprise'}" readonly></div>
+            </div>
+            <div style="margin-top:16px;background:var(--blue-50);border-left:3px solid var(--blue-700);padding:14px;border-radius:var(--radius-sm);font-size:13px;color:var(--gray-600);">
+              <strong>Note:</strong> To update your account details, please contact the WATERNET admin team.
+            </div>
+          </div>
+          <div class="settings-panel hidden" id="s-thresholds">
+            <h3>Alert thresholds</h3>
+            ${[['TDS alert threshold (ppm)','75'],['pH minimum','6.8'],['pH maximum','7.5'],['Temperature max (°C)','28'],['Low purification alert (L/day)','200']].map(([l,v])=>`<div class="threshold-row"><span class="th-label">${l}</span><input class="th-input" type="number" value="${v}"></div>`).join('')}
+            <div class="form-actions" style="margin-top:20px;"><button class="btn btn-primary btn-sm">Save thresholds</button></div>
+          </div>
+          <div class="settings-panel hidden" id="s-notif">
+            <h3>Notification preferences</h3>
+            ${[['Email alerts for sensor warnings','checked'],['Email alerts for machine offline','checked'],['Weekly summary report','checked'],['Daily usage digest',''],['SMS alerts (premium)','']].map(([l,c])=>`<div class="threshold-row"><span class="th-label">${l}</span><input type="checkbox" ${c} style="width:18px;height:18px;accent-color:var(--blue-700);"></div>`).join('')}
+            <div class="form-actions" style="margin-top:20px;"><button class="btn btn-primary btn-sm">Save preferences</button></div>
+          </div>
+        </div>
+      </div>`;
+  }
+}
+
+function stTab(el, target) {
+  document.querySelectorAll('.st-tab').forEach(t=>t.classList.remove('active')); el.classList.add('active');
+  document.querySelectorAll('#s-account,#s-thresholds,#s-notif').forEach(p=>p.classList.add('hidden'));
+  document.getElementById(target).classList.remove('hidden');
+}
+
+function filterTable(q) {
+  const rows = document.querySelectorAll('#machine-table tbody tr');
+  rows.forEach(r => { r.style.display = r.textContent.toLowerCase().includes(q.toLowerCase()) ? '' : 'none'; });
+}
+
+function doRegister() {
+  document.getElementById('reg-success').classList.remove('hidden');
+}
+
+function machineCardHTML(m) {
+  const statusBadge = `<span class="badge ${m.status==='online'?'badge-online':m.status==='warn'?'badge-warn':'badge-offline'}">${m.status==='warn'?'⚠ Warning':m.status}</span>`;
+  const sensors = m.status !== 'offline' ? `
+    <div class="sensor-grid">
+      <div class="sensor-box"><div class="sb-lbl">Temperature</div><div class="sb-val" id="t-${m.id}">${m.temp.toFixed(1)}<span class="sb-unit">°C</span></div><div class="sb-bar-wrap"><div class="sb-bar bar-amber" id="tb-${m.id}" style="width:${Math.round((m.temp-20)/15*100)}%"></div></div></div>
+      <div class="sensor-box"><div class="sb-lbl">TDS</div><div class="sb-val ${m.tds>70?'warn-val':''}" id="td-${m.id}">${m.tds}<span class="sb-unit">ppm</span></div><div class="sb-bar-wrap"><div class="sb-bar ${m.tds>70?'bar-amber':'bar-blue'}" id="tdb-${m.id}" style="width:${Math.round(m.tds/150*100)}%"></div></div></div>
+      <div class="sensor-box"><div class="sb-lbl">pH level</div><div class="sb-val ${m.ph<7?'warn-val':''}" id="ph-${m.id}">${m.ph.toFixed(1)}<span class="sb-unit">pH</span></div><div class="sb-bar-wrap"><div class="sb-bar bar-teal" style="width:${Math.round((m.ph-6)/3*100)}%"></div></div></div>
+      <div class="sensor-box"><div class="sb-lbl">Purified today</div><div class="sb-val" id="pu-${m.id}">${m.purified.toLocaleString()}<span class="sb-unit">L</span></div><div class="sb-bar-wrap"><div class="sb-bar bar-green" style="width:${Math.round(m.purified/2500*100)}%"></div></div></div>
+    </div>` : `<div class="offline-placeholder"><i class="fa-solid fa-wifi-slash"></i>Device offline — not reporting</div>`;
+  return `<div class="machine-card">
+    <div class="mc-head"><div><div class="mc-id">${m.id}</div><div class="mc-loc"><i class="fa-solid fa-location-dot" style="font-size:10px;margin-right:3px;"></i>${m.loc}</div></div>${statusBadge}</div>
+    ${sensors}
+    <div class="mc-foot"><div class="mc-foot-stat">Raw used: <strong>${m.raw.toLocaleString()} L</strong></div><div class="mc-foot-stat">Efficiency: <strong>${Math.round(m.purified/m.raw*100)}%</strong></div></div>
+  </div>`;
+}
+
+/* ═══════════════════════════════════════
+   LIVE UPDATES
+═══════════════════════════════════════ */
+function startLive() {
+  clearInterval(liveTimer);
+  liveTimer = setInterval(() => {
+    CLIENTS[currentClient].machines.forEach(id => {
+      const m = MACHINES[id];
+      if (m.status === 'offline') return;
+      m.temp = parseFloat((m.temp + (Math.random()-.5)*.3).toFixed(1));
+      m.tempHot     = parseFloat(((m.tempHot||85) + (Math.random()-.5)*.5).toFixed(1));
+      m.tempCold    = parseFloat(((m.tempCold||8) + (Math.random()-.5)*.2).toFixed(1));
+      m.tempAmbient = m.temp;
+      m.tds  = Math.max(30, Math.min(100, Math.round(m.tds + (Math.random()-.5)*2)));
+      m.ph   = parseFloat((Math.max(6.5, Math.min(7.8, m.ph + (Math.random()-.5)*.05))).toFixed(1));
+      m.purified += Math.round(Math.random()*3);
+      m.raw      += Math.round(Math.random()*4);
+      const upd = (sid, val) => { const el=document.getElementById(sid); if(el) el.innerHTML=val; };
+      upd(`t-${id}`,  `${m.temp.toFixed(1)}<span class="sb-unit">°C</span>`);
+      upd(`td-${id}`, `${m.tds}<span class="sb-unit">ppm</span>`);
+      upd(`ph-${id}`, `${m.ph.toFixed(1)}<span class="sb-unit">pH</span>`);
+      upd(`pu-${id}`, `${m.purified.toLocaleString()}<span class="sb-unit">L</span>`);
+    });
+  }, 2000);
+}
+
+/* ═══════════════════════════════════════
+   ADMIN RENDERS
+═══════════════════════════════════════ */
+const adminMeta = {
+  'admin-overview':  ['Admin Overview','System-wide machine and client monitoring'],
+  'admin-clients':   ['Client Management','All registered enterprise clients'],
+  'admin-machines':  ['All Machines','Every dispenser across all clients'],
+  'admin-alerts':    ['System Alerts','Warnings and events across the fleet'],
+  'admin-users':     ['User Accounts','Manage client admin accounts'],
+  'admin-settings':  ['System Settings','Global thresholds and configuration']
+};
+
+function adminNav(view, el) {
+  if(el){ document.querySelectorAll('#page-admin .nav-item').forEach(n=>n.classList.remove('active')); el.classList.add('active'); }
+  const [t,s] = adminMeta[view]||['Admin',''];
+  document.getElementById('admin-page-title').textContent = t;
+  document.getElementById('admin-page-sub').textContent = s;
+  renderAdmin(view);
+}
+
+function renderAdmin(view) {
+  const body = document.getElementById('admin-body');
+  const allMachines = Object.entries(MACHINES).map(([id,m])=>({id,...m}));
+
+  if (view === 'admin-overview') {
+    const totalMachines = allMachines.length;
+    const online  = allMachines.filter(m=>m.status==='online').length;
+    const warn    = allMachines.filter(m=>m.status==='warn').length;
+    const offline = allMachines.filter(m=>m.status==='offline').length;
+    const totalClients = Object.keys(CLIENTS).length;
+    const totalPurified = allMachines.reduce((s,m)=>s+m.purified,0);
+
+    body.innerHTML = `
+      <div class="metrics-row" style="grid-template-columns:repeat(5,1fr);">
+        <div class="metric-card"><div class="mc-icon blue"><i class="fa-solid fa-building"></i></div><div class="mc-val">${totalClients}</div><div class="mc-lbl">Active clients</div></div>
+        <div class="metric-card"><div class="mc-icon teal"><i class="fa-solid fa-server"></i></div><div class="mc-val">${totalMachines}</div><div class="mc-lbl">Total machines</div></div>
+        <div class="metric-card"><div class="mc-icon green"><i class="fa-solid fa-signal"></i></div><div class="mc-val">${online}</div><div class="mc-lbl">Online now</div></div>
+        <div class="metric-card"><div class="mc-icon amber"><i class="fa-solid fa-triangle-exclamation"></i></div><div class="mc-val">${warn}</div><div class="mc-lbl">Warnings</div></div>
+        <div class="metric-card"><div class="mc-icon red"><i class="fa-solid fa-wifi-slash"></i></div><div class="mc-val">${offline}</div><div class="mc-lbl">Offline</div></div>
+      </div>
+      <div style="font-size:13px;font-weight:600;color:var(--blue-900);margin-bottom:12px;">All clients</div>
+      <div class="admin-client-row">
+        ${Object.entries(CLIENTS).map(([key,c])=>{
+          const ms = c.machines.map(id=>MACHINES[id]);
+          const on = ms.filter(m=>m.status==='online').length;
+          const pur = ms.reduce((s,m)=>s+m.purified,0);
+          return `<div class="admin-client-card" onclick="adminNav('admin-clients',null)">
+            <div class="client-logo-circle" style="background:${c.color};">${c.initials}</div>
+            <div><div class="client-info-name">${c.name}</div><div class="client-info-meta">${c.machines.length} machines · ${on} online</div></div>
+            <div class="client-stats-row">
+              <div class="cstat"><div class="cstat-val">${pur.toLocaleString()}</div><div class="cstat-lbl">Litres today</div></div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="section-toolbar"><h2>Fleet overview — all machines</h2></div>
+      <div class="data-table-wrap"><table class="data-table">
+        <thead><tr><th>ID</th><th>Client</th><th>Location</th><th>Status</th><th>TDS</th><th>pH</th><th>Purified (L)</th></tr></thead>
+        <tbody>${allMachines.map(m=>{
+          const clientName = Object.values(CLIENTS).find(c=>c.machines.includes(m.id))?.name||'—';
+          return `<tr>
+            <td style="font-weight:600;color:var(--blue-900);">${m.id}</td>
+            <td>${clientName}</td>
+            <td style="color:var(--gray-500);">${m.loc}</td>
+            <td><span class="badge ${m.status==='online'?'badge-online':m.status==='warn'?'badge-warn':'badge-offline'}">${m.status==='warn'?'⚠ Warning':m.status}</span></td>
+            <td class="${m.tds>70?'warn-val':''}">${m.tds??'—'}</td>
+            <td class="${m.ph&&m.ph<7?'warn-val':''}">${m.ph??'—'}</td>
+            <td>${m.purified.toLocaleString()}</td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table></div>`;
+
+  } else if (view === 'admin-clients') {
+    body.innerHTML = `
+      <div class="section-toolbar"><h2>All clients <span style="color:var(--gray-500);font-weight:400;font-size:13px;">(${Object.keys(CLIENTS).length})</span></h2><button class="btn btn-primary btn-sm" onclick="openAddClientModal()"><i class="fa-solid fa-plus"></i>Add client</button></div>
+      <div class="data-table-wrap"><table class="data-table" id="clients-table">
+        <thead><tr><th>Client</th><th>Machines</th><th>Online</th><th>Purified today</th><th>Plan</th><th>Actions</th></tr></thead>
+        <tbody id="clients-tbody">${renderClientsRows()}</tbody>
+      </table></div>
+
+      <!-- ── ADD CLIENT MODAL ── -->
+      <div id="add-client-modal" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(4,44,83,0.45);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+        <div style="background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);width:100%;max-width:540px;padding:36px;position:relative;margin:20px;">
+          <button onclick="closeAddClientModal()" style="position:absolute;top:16px;right:16px;background:var(--gray-100);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px;color:var(--gray-500);display:flex;align-items:center;justify-content:center;">×</button>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+            <div style="width:44px;height:44px;border-radius:12px;background:var(--blue-50);display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-building" style="color:var(--blue-700);font-size:18px;"></i></div>
+            <div><div style="font-size:17px;font-weight:600;color:var(--blue-900);">Add new client</div><div style="font-size:13px;color:var(--gray-500);">Onboard a new enterprise account</div></div>
+          </div>
+
+          <div class="form-grid-2" style="margin-bottom:14px;">
+            <div class="form-group">
+              <label class="form-label">Organisation name <span style="color:var(--danger);">*</span></label>
+              <input class="form-input" id="nc-name" type="text" placeholder="e.g. Infosys Ltd">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Short initials (2–3 chars) <span style="color:var(--danger);">*</span></label>
+              <input class="form-input" id="nc-initials" type="text" maxlength="3" placeholder="e.g. IN" oninput="this.value=this.value.toUpperCase()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Admin email <span style="color:var(--danger);">*</span></label>
+              <input class="form-input" id="nc-email" type="email" placeholder="admin@company.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Default password <span style="color:var(--danger);">*</span></label>
+              <input class="form-input" id="nc-password" type="text" placeholder="e.g. demo@123">
+            </div>
+            <div class="form-group">
+              <label class="form-label">City <span style="color:var(--danger);">*</span></label>
+              <input class="form-input" id="nc-city" placeholder="e.g. Mumbai">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Plan</label>
+              <select class="form-input" id="nc-plan">
+                <option>Enterprise</option>
+                <option>Business</option>
+                <option>Starter</option>
+              </select>
+            </div>
+
+          <div class="form-group">
+            <label class="form-label">Brand colour</label>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;" id="nc-color-picker">
+              ${['#185FA5','#1D9E75','#BA7517','#A32D2D','#6D3E91','#0F6E56','#C25D1E','#2272C3'].map(c=>`
+                <div onclick="selectClientColor('${c}',this)"
+                  style="width:28px;height:28px;border-radius:50%;background:${c};cursor:pointer;border:2px solid transparent;transition:transform .15s,border-color .15s;"
+                  data-color="${c}" title="${c}"></div>`).join('')}
+              <input type="color" id="nc-custom-color" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--gray-300);cursor:pointer;padding:0;" title="Custom colour" onchange="selectClientColor(this.value,null)">
+            </div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:8px;">
+              <div id="nc-color-preview" style="width:36px;height:36px;border-radius:9px;background:#185FA5;"></div>
+              <div id="nc-initials-preview" style="width:36px;height:36px;border-radius:9px;background:#185FA5;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;">?</div>
+              <span style="font-size:12px;color:var(--gray-500);">Preview badge</span>
+            </div>
+          </div>
+
+          <div id="nc-error" style="display:none;background:#FCEBEB;color:var(--danger);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-top:4px;"></div>
+          <div id="nc-success" style="display:none;background:var(--teal-50);color:var(--teal-700);border:1px solid var(--teal-200);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-top:4px;display:flex;align-items:center;gap:8px;"><i class="fa-solid fa-check-circle"></i></div>
+
+          <div style="display:flex;gap:10px;margin-top:20px;justify-content:flex-end;">
+            <button class="btn btn-ghost" onclick="closeAddClientModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="submitAddClient()"><i class="fa-solid fa-building-circle-check"></i>Create client</button>
+          </div>
+        </div>
+      </div>`;
+
+    // Pre-select first colour swatch
+    const firstSwatch = document.querySelector('#nc-color-picker [data-color]');
+    if (firstSwatch) selectClientColor('#185FA5', firstSwatch);
+
+    // Live initials preview
+    document.getElementById('nc-initials').addEventListener('input', function() {
+      const el = document.getElementById('nc-initials-preview');
+      if (el) el.textContent = this.value || '?';
+    });
+
+  } else if (view === 'admin-machines') {
+    body.innerHTML = `
+      <div class="section-toolbar"><h2>All machines (${allMachines.length})</h2><input class="search-input" placeholder="Search…" oninput="filterTable(this.value)"></div>
+      <div class="data-table-wrap"><table class="data-table" id="machine-table">
+        <thead><tr><th>ID</th><th>Client</th><th>Location</th><th>Status</th><th>Temp</th><th>TDS</th><th>pH</th><th>Purified</th><th>Installed</th></tr></thead>
+        <tbody>${allMachines.map(m=>{
+          const cn = Object.values(CLIENTS).find(c=>c.machines.includes(m.id))?.name||'—';
+          return `<tr>
+            <td style="font-weight:600;color:var(--blue-900);">${m.id}</td>
+            <td>${cn}</td>
+            <td style="color:var(--gray-500);">${m.loc}</td>
+            <td><span class="badge ${m.status==='online'?'badge-online':m.status==='warn'?'badge-warn':'badge-offline'}">${m.status==='warn'?'⚠':m.status}</span></td>
+            <td>${m.temp??'—'}</td>
+            <td class="${m.tds>70?'warn-val':''}">${m.tds??'—'}</td>
+            <td class="${m.ph&&m.ph<7?'warn-val':''}">${m.ph??'—'}</td>
+            <td>${m.purified.toLocaleString()} L</td>
+            <td style="color:var(--gray-500);">${m.installed}</td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table></div>`;
+
+  } else if (view === 'admin-alerts') {
+    const alerts = [
+      {icon:'fa-triangle-exclamation',cls:'ai-warn',text:'TDS on <strong>WN-G003</strong> (Google Corp) — 78 ppm exceeds threshold of 75 ppm.',time:'2 min ago'},
+      {icon:'fa-wifi',cls:'ai-error',text:'<strong>WN-G004</strong> (Google Corp) went offline. Last seen at 14:32.',time:'18 min ago'},
+      {icon:'fa-flask',cls:'ai-warn',text:'pH on <strong>WN-M003</strong> (Microsoft) dropped to 6.7 — below safe range.',time:'1 hr ago'},
+      {icon:'fa-temperature-half',cls:'ai-warn',text:'Temperature on <strong>WN-G003</strong> elevated at 26.8°C — check ambient conditions.',time:'2 hr ago'},
+      {icon:'fa-check',cls:'ai-ok',text:'<strong>WN-G001</strong> filter replacement confirmed. TDS normalised at 48 ppm.',time:'3 hr ago'},
+      {icon:'fa-droplet',cls:'ai-info',text:'<strong>WN-A001</strong> (Amazon India) reached 2,000 L today.',time:'5 hr ago'},
+    ];
+    body.innerHTML = `
+      <div class="panel" style="max-width:680px;">
+        <div class="panel-title">System alerts <span class="badge badge-offline">5 active</span></div>
+        ${alerts.map(a=>`<div class="alert-item"><div class="alert-icon ${a.cls}"><i class="fa-solid ${a.icon}"></i></div><div class="alert-body"><div class="alert-text">${a.text}</div><div class="alert-time">${a.time}</div></div><button class="btn btn-ghost btn-sm" style="margin-left:auto;flex-shrink:0;">Resolve</button></div>`).join('')}
+      </div>`;
+
+  } else if (view === 'admin-users') {
+    body.innerHTML = `
+      <div class="section-toolbar"><h2>User accounts</h2><button class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i>Invite user</button></div>
+      <div class="data-table-wrap"><table class="data-table">
+        <thead><tr><th>Name</th><th>Email</th><th>Client</th><th>Role</th><th>Last login</th><th>Actions</th></tr></thead>
+        <tbody>${[
+          ['Rohan Mehra','rohan@google.com','Google Corp','Admin','Today 9:14 AM'],
+          ['Priti Singh','priti@amazon.com','Amazon India','Admin','Yesterday'],
+          ['Karan Nair','karan@microsoft.com','Microsoft','Admin','2 days ago'],
+          ['Anil Joshi','anil@jpmorgan.com','JPMorgan Chase','Viewer','5 days ago'],
+          ['Neha Verma','neha@google.com','Google Corp','Viewer','Today 11:02 AM'],
+        ].map(([n,e,c,r,l])=>`<tr>
+          <td style="font-weight:500;">${n}</td>
+          <td style="color:var(--gray-500);">${e}</td>
+          <td>${c}</td>
+          <td><span class="badge ${r==='Admin'?'badge-blue':'badge-online'}">${r}</span></td>
+          <td style="color:var(--gray-500);">${l}</td>
+          <td style="display:flex;gap:6px;"><button class="btn btn-ghost btn-sm"><i class="fa-solid fa-pen"></i></button><button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button></td>
+        </tr>`).join('')}</tbody>
+      </table></div>`;
+
+  } else if (view === 'admin-settings') {
+    body.innerHTML = `
+      <div style="max-width:560px;">
+        <div class="register-card">
+          <h3>Global alert thresholds</h3>
+          <p>These defaults apply to all clients unless overridden in client settings.</p>
+          ${[['TDS max (ppm)','75'],['pH minimum','6.8'],['pH maximum','7.5'],['Temperature max (°C)','28'],['Offline alert after (min)','10']].map(([l,v])=>`<div class="threshold-row"><span class="th-label">${l}</span><input class="th-input" type="number" value="${v}"></div>`).join('')}
+          <div class="form-actions"><button class="btn btn-primary btn-sm">Save global settings</button></div>
+        </div>
+      </div>`;
+  }
+}
+
+/* ═══════════════════════════════════════
+   MISC
+═══════════════════════════════════════ */
+function showLoginError(msg) {
+  let errEl = document.getElementById('login-error');
+  if (!errEl) {
+    errEl = document.createElement('div');
+    errEl.id = 'login-error';
+    errEl.style.cssText = 'background:#FCEBEB;color:var(--danger);border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;margin-top:10px;margin-bottom:10px;';
+    document.querySelector('.login-box').insertBefore(errEl, document.querySelector('.login-submit'));
+  }
+  errEl.textContent = msg;
+  errEl.style.display = 'block';
+}
+
+function hideLoginError() {
+  const errEl = document.getElementById('login-error');
+  if (errEl) errEl.style.display = 'none';
+}
+
+/* ═══════════════════════════════════════
+   EDIT MACHINE
+═══════════════════════════════════════ */
+let _editingMachineId = null;
+
+function openEditMachineModal(machineId) {
+  _editingMachineId = machineId;
+  const m = MACHINES[machineId];
+  document.getElementById('em-id').value = m.id;
+  document.getElementById('em-loc').value = m.loc;
+  document.getElementById('em-error').style.display = 'none';
+  const modal = document.getElementById('edit-machine-modal');
+  if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+}
+
+function closeEditMachineModal() {
+  const modal = document.getElementById('edit-machine-modal');
+  if (modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
+  _editingMachineId = null;
+}
+
+function submitEditMachine() {
+  const newId = document.getElementById('em-id')?.value.trim();
+  const newLoc = document.getElementById('em-loc')?.value.trim();
+  const errEl = document.getElementById('em-error');
+  errEl.style.display = 'none';
+
+  if (!newId) { errEl.textContent = 'Machine ID is required.'; errEl.style.display='block'; return; }
+  if (!newLoc) { errEl.textContent = 'Location is required.'; errEl.style.display='block'; return; }
+
+  const oldMachine = MACHINES[_editingMachineId];
+  
+  // Update machine object
+  const updated = { ...oldMachine, id: newId, loc: newLoc };
+  delete MACHINES[_editingMachineId];
+  MACHINES[newId] = updated;
+  
+  // Update client's machine list
+  const c = CLIENTS[currentClient];
+  const idx = c.machines.indexOf(_editingMachineId);
+  if (idx >= 0) c.machines[idx] = newId;
+
+  renderClientDash('client-machines');
+  closeEditMachineModal();
+}
+
+/* ═══════════════════════════════════════
+   ADD CLIENT
+═══════════════════════════════════════ */
+let _selectedClientColor = '#185FA5';
+
+function renderClientsRows() {
+  return Object.entries(CLIENTS).map(([key,c]) => {
+    const ms  = c.machines.map(id => MACHINES[id]);
+    const on  = ms.filter(m => m.status === 'online').length;
+    const pur = ms.reduce((s,m) => s + m.purified, 0);
+    return `<tr>
+      <td><div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:8px;background:${c.color};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;">${c.initials}</div>
+        <div><div style="font-weight:600;">${c.name}</div><div style="font-size:11px;color:var(--gray-500);">${c.email}</div></div>
+      </div></td>
+      <td>${c.machines.length}</td>
+      <td class="ok-val">${on}</td>
+      <td>${pur.toLocaleString()} L</td>
+      <td><span class="badge badge-blue">${c.plan||'Enterprise'}</span></td>
+      <td style="display:flex;gap:6px;">
+        <button class="btn btn-ghost btn-sm" onclick="openEditClientModal('${key}')"><i class="fa-solid fa-edit"></i>Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="removeClient('${key}')"><i class="fa-solid fa-trash"></i></button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function openAddClientModal() {
+  const modal = document.getElementById('add-client-modal');
+  if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+}
+
+function closeAddClientModal() {
+  const modal = document.getElementById('add-client-modal');
+  if (modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
+  ['nc-name','nc-initials','nc-email','nc-password','nc-city'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
+  const err = document.getElementById('nc-error');
+  const suc = document.getElementById('nc-success');
+  if (err) err.style.display = 'none';
+  if (suc) suc.style.display = 'none';
+  _selectedClientColor = '#185FA5';
+  _editingClientKey = null;
+}
+
+let _editingClientKey = null;
+
+function openEditClientModal(key) {
+  _editingClientKey = key;
+  const c = CLIENTS[key];
+  document.getElementById('nc-name').value = c.name;
+  document.getElementById('nc-initials').value = c.initials;
+  document.getElementById('nc-email').value = c.email;
+  document.getElementById('nc-password').value = c.defaultPassword;
+  document.getElementById('nc-city').value = c.city;
+  document.getElementById('nc-plan').value = c.plan || 'Enterprise';
+  _selectedClientColor = c.color;
+  selectClientColor(c.color, null);
+  const modal = document.getElementById('add-client-modal');
+  if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  // Update modal title
+  const title = document.querySelector('#add-client-modal [style*="font-size: 17px"]');
+  if (title) title.textContent = 'Edit client';
+  const btn = document.querySelector('#add-client-modal .btn-primary');
+  if (btn) btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>Save changes';
+}
+
+function submitAddClient() {
+  const name     = document.getElementById('nc-name')?.value.trim();
+  const initials = document.getElementById('nc-initials')?.value.trim().toUpperCase();
+  const email    = document.getElementById('nc-email')?.value.trim();
+  const password = document.getElementById('nc-password')?.value.trim();
+  const city     = document.getElementById('nc-city')?.value.trim();
+  const plan     = document.getElementById('nc-plan')?.value || 'Enterprise';
+  const errEl    = document.getElementById('nc-error');
+  const sucEl    = document.getElementById('nc-success');
+
+  errEl.style.display = 'none';
+  sucEl.style.display = 'none';
+
+  if (!name)     { errEl.textContent = 'Organisation name is required.'; errEl.style.display='block'; return; }
+  if (!initials || initials.length < 2) { errEl.textContent = 'Initials must be 2–3 characters.'; errEl.style.display='block'; return; }
+  if (!email || !email.includes('@')) { errEl.textContent = 'A valid admin email is required.'; errEl.style.display='block'; return; }
+  if (!password) { errEl.textContent = 'Default password is required.'; errEl.style.display='block'; return; }
+  if (!city) { errEl.textContent = 'City is required.'; errEl.style.display='block'; return; }
+
+  if (_editingClientKey) {
+    // Update existing client
+    const key = _editingClientKey;
+    CLIENTS[key].name = name;
+    CLIENTS[key].initials = initials;
+    CLIENTS[key].email = email;
+    CLIENTS[key].defaultPassword = password;
+    CLIENTS[key].city = city;
+    CLIENTS[key].color = _selectedClientColor;
+    CLIENTS[key].plan = plan;
+    sucEl.innerHTML = `<i class="fa-solid fa-check-circle"></i>&nbsp; <strong>${name}</strong> has been updated successfully.`;
+    // Update EMAIL_CLIENT_MAP in case email changed
+    Object.keys(EMAIL_CLIENT_MAP).forEach(e => {
+      if (EMAIL_CLIENT_MAP[e] === key) delete EMAIL_CLIENT_MAP[e];
+    });
+    EMAIL_CLIENT_MAP[email] = key;
+  } else {
+    // Create new client
+    const key = name.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 12) + '_' + Date.now().toString(36).slice(-4);
+    if (CLIENTS[key]) { errEl.textContent = 'A client with this name already exists.'; errEl.style.display='block'; return; }
+    CLIENTS[key] = { name, initials, color: _selectedClientColor, plan, city, email, defaultPassword: password, machines: [] };
+    EMAIL_CLIENT_MAP[email] = key;
+    sucEl.innerHTML = `<i class="fa-solid fa-check-circle"></i>&nbsp; <strong>${name}</strong> has been added successfully.`;
+  }
+
+  // Update the table
+  const tbody = document.getElementById('clients-tbody');
+  if (tbody) tbody.innerHTML = renderClientsRows();
+
+  // Update client count in toolbar
+  const h2 = document.querySelector('#admin-body .section-toolbar h2');
+  if (h2) h2.innerHTML = `All clients <span style="color:var(--gray-500);font-weight:400;font-size:13px;">(${Object.keys(CLIENTS).length})</span>`;
+
+  sucEl.style.display = 'flex';
+  setTimeout(() => closeAddClientModal(), 1600);
+}
+
+function removeClient(key) {
+  if (!CLIENTS[key]) return;
+  if (!confirm(`Remove "${CLIENTS[key].name}" and all their machines? This cannot be undone.`)) return;
+  // Remove machines
+  CLIENTS[key].machines.forEach(id => delete MACHINES[id]);
+  delete CLIENTS[key];
+  const tbody = document.getElementById('clients-tbody');
+  if (tbody) tbody.innerHTML = renderClientsRows();
+  const h2 = document.querySelector('#admin-body .section-toolbar h2');
+  if (h2) h2.innerHTML = `All clients <span style="color:var(--gray-500);font-weight:400;font-size:13px;">(${Object.keys(CLIENTS).length})</span>`;
+}
+
+// Init
+renderAdmin('admin-overview');
+renderClientDash('client-dashboard');
+</script>
+</body>
+</html>

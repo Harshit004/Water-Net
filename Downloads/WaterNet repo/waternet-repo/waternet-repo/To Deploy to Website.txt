@@ -1,0 +1,8 @@
+# Extract the zip
+unzip waternet-repo.zip
+
+# Copy to web hosting
+cp frontend/index.html public_html/
+cp backend/api/* public_html/api/
+cp backend/.htaccess public_html/
+cp database/schema.sql [import to MySQL]

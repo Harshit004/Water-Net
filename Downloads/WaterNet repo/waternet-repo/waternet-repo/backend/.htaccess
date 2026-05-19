@@ -1,0 +1,48 @@
+# WATERNET — Apache .htaccess for cPanel
+# Place this in public_html/
+
+Options -Indexes
+ServerSignature Off
+
+# ── HTTPS redirect (enable after SSL is set up) ──────────────────────────
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── Remove .php extension from API routes ────────────────────────────────
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L,QSA]
+
+# ── Block direct access to config files ──────────────────────────────────
+<FilesMatch "^(database|auth|helpers)\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ── Security headers ─────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    # Uncomment when HTTPS is live:
+    # Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# ── Cache static assets ──────────────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css              "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png             "access plus 1 year"
+    ExpiresByType image/jpeg            "access plus 1 year"
+    ExpiresByType image/svg+xml        "access plus 1 year"
+</IfModule>
+
+# ── Gzip compression ─────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
+</IfModule>

@@ -1,0 +1,23 @@
+# ── Environment / secrets ─────────────────────────────────
+.env
+.env.local
+backend/config/database.php   # Never commit real credentials
+
+# ── OS noise ─────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor ───────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Logs ─────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Node (if tooling is added later) ─────────────────────
+node_modules/
+npm-debug.log*
